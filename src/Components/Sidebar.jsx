@@ -1,50 +1,28 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { FaHome, FaInfoCircle, FaEnvelope, FaChevronDown, FaChevronRight, FaUser } from 'react-icons/fa';
-import { motion } from 'framer-motion'; // Import Framer Motion
+import { motion } from 'framer-motion';
 import ezi from '../assets/ezi.png';
 import ezicalc from '../assets/ezicalc.png';
 import { VscCircleFilled } from 'react-icons/vsc';
-import {  FaEarthAmericas } from 'react-icons/fa6';
+import { FaEarthAmericas } from 'react-icons/fa6';
+// import {  MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
-const Sidebar = () => {
+const Sidebar = ({ setIsSidebarCollapsed }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [openMenus, setOpenMenus] = useState({});
   const location = useLocation();
 
   const menuItems = [
-    {
-      title: 'Home',
-      icon: <FaHome />,
-      subItems: [
-        { title: 'Home 1', path: '/home/home1' },
-     
-      ],
-    },
-    {
-      title: 'About',
-      icon: <FaInfoCircle />,
-      subItems: [
-        { title: 'About 1', path: '/about/about1' },
-     
-      ],
-    },
-    { title: 'Contact', icon: <FaEnvelope />, path: '/contact' }, 
-    { title: 'Email', icon: <FaEarthAmericas />, path: '/Email' }, 
-    {
-      title: 'Users',
-      icon: <FaUser />,
-      subItems: [
-        { title: 'Lists', path: '/users/list' },
-       
-      ],
-    }
+    { title: 'Home', icon: <FaHome />, subItems: [{ title: 'Home 1', path: '/home/home1' }] },
+    { title: 'About', icon: <FaInfoCircle />, subItems: [{ title: 'About 1', path: '/about/about1' }] },
+    { title: 'Contact', icon: <FaEnvelope />, path: '/contact' },
+    { title: 'Email', icon: <FaEarthAmericas />, path: '/Email' },
+    { title: 'Users', icon: <FaUser />, subItems: [{ title: 'Lists', path: '/users/list' }] },
   ];
 
   const toggleMenu = (index) => {
-    setOpenMenus((prevState) => ({
-      [index]: !prevState[index], // Toggle the current menu
-    }));
+    setOpenMenus((prevState) => ({ [index]: !prevState[index] }));
   };
 
   const dropdownVariants = {
@@ -56,22 +34,25 @@ const Sidebar = () => {
     <motion.div
       initial={{ width: isCollapsed ? 64 : 240 }}
       animate={{ width: isCollapsed ? 64 : 240 }}
-      transition={{ type: 'spring', stiffness: 50, damping: 15 }} 
-      className="h-screen bg-[#eaebee] flex flex-col"
+      transition={{ type: 'spring', stiffness: 50, damping: 15 }}
+      className="fixed z-30 h-screen bg-[#eaebee] flex flex-col"
       onMouseEnter={() => setIsCollapsed(false)}
       onMouseLeave={() => setIsCollapsed(true)}
     >
-      {/* Project Name with Icon */}
       <div className="flex items-center p-4 bg-[#eaebee]">
         <img src={ezi} alt="Ezicalc Logo" className="w-8 h-8" />
         {!isCollapsed && (
-          <span className="ml-2 text-xl font-bold">
+          <span className="ml-2  flex  items-center text-xl font-bold">
             <img src={ezicalc} alt="logo" className="w-[70%]" />
+
+            {/* <span className=' ml-10 '>
+              <MdKeyboardDoubleArrowRight  />
+            </span> */}
           </span>
+          
         )}
       </div>
 
-      {/* Menu Items */}
       <div className="flex-1 ml-4 overflow-y-auto">
         {menuItems.map((item, index) => {
           const isSubmenuOpen = openMenus[index];
@@ -81,31 +62,28 @@ const Sidebar = () => {
 
           return (
             <div key={index} className="group">
-              {/* Main Item */}
               {item.subItems ? (
-                // If the item has subItems, make it clickable for toggling
                 <div
-                  className={`flex items-center space-x-2 justify-between  p-2 cursor-pointer transition ${
-                    isParentOrSubActive ? 'bg-gray-300 text-gray-800' : 'hover:bg-gray-300 '
+                  className={`flex items-center space-x-2 justify-between p-2 cursor-pointer transition ${
+                    isParentOrSubActive ? 'bg-gray-300 text-gray-800' : 'hover:bg-gray-300'
                   } ${isCollapsed ? 'justify-center' : ''}`}
                   onClick={() => toggleMenu(index)}
                 >
-                 <div className=' flex items-center gap-4'>
-                 {item.icon}
-                 {!isCollapsed && <span>{item.title}</span>}
-                 </div>
+                  <div className="flex items-center gap-4">
+                    {item.icon}
+                    {!isCollapsed && <span>{item.title}</span>}
+                  </div>
                   {!isCollapsed && (
-                    <span className=" ">
+                    <span>
                       {isSubmenuOpen ? <FaChevronDown /> : <FaChevronRight />}
                     </span>
                   )}
                 </div>
               ) : (
-                // If no subItems, use NavLink for direct navigation
                 <NavLink
                   to={item.path}
                   className={`flex items-center space-x-2 p-2 cursor-pointer transition ${
-                    isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md '
+                    isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'
                   } ${isCollapsed ? 'justify-start' : ''}`}
                 >
                   {item.icon}
@@ -113,16 +91,15 @@ const Sidebar = () => {
                 </NavLink>
               )}
 
-              {/* Subitems with Animation */}
               {!isCollapsed && item.subItems && (
                 <motion.div
                   initial={false}
                   animate={isSubmenuOpen ? 'open' : 'closed'}
                   variants={dropdownVariants}
-                  className="overflow-hidden "
+                  className="overflow-hidden"
                 >
                   {item.subItems.map((subItem, subIndex) => {
-                    const isActive = location.pathname === subItem.path; // Check active state
+                    const isActive = location.pathname === subItem.path;
                     return (
                       <NavLink
                         key={subIndex}
@@ -131,7 +108,7 @@ const Sidebar = () => {
                           isActive ? 'text-white bg-sky-500 rounded-md' : 'hover:bg-gray-300 rounded-md'
                         }`}
                       >
-                        <VscCircleFilled color={isActive ? 'white' : 'gray'} /> {/* Conditional color */}
+                        <VscCircleFilled color={isActive ? 'white' : 'gray'} />
                         <span>{subItem.title}</span>
                       </NavLink>
                     );

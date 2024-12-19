@@ -7,26 +7,18 @@ import Sidebar from '../Components/Sidebar';
 import UserList from '../Pages/Users/UserList';
 
 function MainRoutes() {
+  // State to track if sidebar is collapsed or not
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
   return (
     <Router>
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex">
         {/* Sidebar */}
-        <div
-          className={`bg-gray-800  ${
-            isSidebarCollapsed ? 'w-16' : 'w-60'
-          } transition-all duration-300 sticky z-20 top-0 h-screen`}
-        >
-          <Sidebar
-            isCollapsed={isSidebarCollapsed}
-            onCollapseToggle={setIsSidebarCollapsed}
-          />
-        </div>
+        <Sidebar setIsSidebarCollapsed={setIsSidebarCollapsed} />
 
-        {/* Main Content */}
+        {/* Main content */}
         <main
-          className={`flex-1 overflow-y-auto transition-all duration-300 p-4 bg-[#f7f7f9]`}
+          className={`flex-1 px-16 py-4 bg-[#f7f7f9] ${isSidebarCollapsed ? 'ml-16' : 'ml-64'} overflow-y-auto`}
         >
           <Routes>
             <Route path="/home/home1" element={<Home1 />} />

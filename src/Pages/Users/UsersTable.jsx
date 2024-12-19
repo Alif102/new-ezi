@@ -53,7 +53,7 @@ const UsersTable = () => {
       </button>
 
       {isOpen && (
-  <ul className="bg-white absolute w-32 text-center rounded-lg shadow-md">
+  <ul className="bg-white z-10 absolute w-32 text-center rounded-lg shadow-md">
     <li className=' cursor-pointer my-2 '>
       <FaFileExcel className="inline mr-2" />
       Excel

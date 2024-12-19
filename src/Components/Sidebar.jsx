@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaEnvelope, FaChevronDown, FaChevronRight, FaSatellite, FaChartArea, FaUser } from 'react-icons/fa';
-import { GoCircle } from 'react-icons/go'; // Import the GoCircle icon
+import { FaHome, FaInfoCircle, FaEnvelope, FaChevronDown, FaChevronRight, FaUser } from 'react-icons/fa';
 import { motion } from 'framer-motion'; // Import Framer Motion
 import ezi from '../assets/ezi.png';
 import ezicalc from '../assets/ezicalc.png';
 import { VscCircleFilled } from 'react-icons/vsc';
-import { FaCableCar, FaEarthAmericas } from 'react-icons/fa6';
+import {  FaEarthAmericas } from 'react-icons/fa6';
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -19,7 +18,7 @@ const Sidebar = () => {
       icon: <FaHome />,
       subItems: [
         { title: 'Home 1', path: '/home/home1' },
-        { title: 'Home 2', path: '/home/home2' },
+     
       ],
     },
     {
@@ -27,7 +26,7 @@ const Sidebar = () => {
       icon: <FaInfoCircle />,
       subItems: [
         { title: 'About 1', path: '/about/about1' },
-        { title: 'About 2', path: '/about/about2' },
+     
       ],
     },
     { title: 'Contact', icon: <FaEnvelope />, path: '/contact' }, 
@@ -39,10 +38,7 @@ const Sidebar = () => {
         { title: 'Lists', path: '/users/list' },
        
       ],
-    },
-    { title: 'Chat', icon: <FaChartArea />, path: '/Chat' }, 
-    { title: 'Card', icon: <FaCableCar />, path: '/card' }, 
-    { title: 'Satistics', icon: <FaSatellite />, path: '/satistics' }, 
+    }
   ];
 
   const toggleMenu = (index) => {
@@ -60,7 +56,7 @@ const Sidebar = () => {
     <motion.div
       initial={{ width: isCollapsed ? 64 : 240 }}
       animate={{ width: isCollapsed ? 64 : 240 }}
-      transition={{ type: 'spring', stiffness: 50, damping: 15 }} // Adjust stiffness and damping for slower animation
+      transition={{ type: 'spring', stiffness: 50, damping: 15 }} 
       className="h-screen bg-[#eaebee] flex flex-col"
       onMouseEnter={() => setIsCollapsed(false)}
       onMouseLeave={() => setIsCollapsed(true)}

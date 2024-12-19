@@ -1,27 +1,29 @@
 import React, { useState } from "react";
-import {  FaTrash, FaEye, FaEllipsisV } from "react-icons/fa";
-import { FiEdit } from "react-icons/fi";
-import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import {  FaTrash, FaEye } from "react-icons/fa";
+import { GrHostMaintenance } from "react-icons/gr";
+import { MdArrowBackIos, MdArrowForwardIos, MdOutlineSubscriptions } from "react-icons/md";
+import { TbChessKing } from "react-icons/tb";
 
-const Table = () => {
+const RoleTable = () => {
   const [rows, setRows] = useState([
     {
       id: 1,
       user: { name: "John Doe", phone: "+1234567890", image: "https://demos.pixinvent.com/materialize-html-admin-template/assets/img/avatars/6.png" },
       email: "john.doe@example.com",
-      role: "Editor",
+      role: "Maintainer",
       plan: "Team",
       status: "Inactive",
       selected: false,
+      icon: <GrHostMaintenance />
     },
     {
       id: 2,
       user: { name: "Jane Smith", phone: "+9876543210", image: "https://demos.pixinvent.com/materialize-html-admin-template/assets/img/avatars/5.png" },
       email: "jane.smith@example.com",
-      role: "Admin",
+      role: "Subscriber",
       plan: "Basic",
       status: "Active",
-      selected: false,
+      selected: false,  icon: <MdOutlineSubscriptions />
     },
     {
       id: 3,
@@ -30,7 +32,7 @@ const Table = () => {
       role: "Author",
       plan: "Company",
       status: "Pending",
-      selected: false,
+      selected: false, icon: <TbChessKing />
     },
   ]);
 
@@ -100,8 +102,8 @@ const Table = () => {
                   </div>
                 </td>
                 <td className="py-3 px-4 text-sm text-gray-800">{row.email}</td>
-                <td className="py-3 px-4 text-sm text-gray-800 flex items-center">
-                  <FiEdit  className="mr-2 text-blue-500" /> {row.role}
+                <td className="py-3 fl px-4 text-sm text-gray-800 flex gap-3 items-center">
+                {row.icon} {row.role}
                 </td>
                 <td className="py-3 px-4 text-sm text-gray-800">{row.plan}</td>
                 <td
@@ -155,4 +157,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default RoleTable;

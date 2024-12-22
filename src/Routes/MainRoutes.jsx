@@ -8,6 +8,7 @@ import UserList from '../Pages/Users/UserList';
 import Roles from '../Pages/Roles/Roles';
 import Pos from '../Pages/Pos/Pos';
 import axios from 'axios';
+import Permission from '../Pages/Roles/Permission/Permission';
 
 
 function MainRoutes() {
@@ -42,8 +43,8 @@ function MainRoutes() {
   useEffect(() => {
     fetchProducts();
   }, [token]);
-  console.log(products)
-  console.log(filteredProducts)
+  // console.log(products)
+  // console.log(filteredProducts)
   
   return (
     <Router>
@@ -56,6 +57,7 @@ function MainRoutes() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/users/list" element={<UserList />} />
             <Route path="/roles" element={<Roles />} />
+            <Route path="/permission" element={<Permission />} />
             {/* <Route path="/pos" element={<Pos   products={products}  />} /> */}
           </Routes>
         </main>

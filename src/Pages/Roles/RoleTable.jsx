@@ -127,9 +127,7 @@ const RoleTable = () => {
                   <button className="text-blue-600 hover:text-blue-800">
                     <FaEye />
                   </button>
-                  {/* <button className="text-gray-600 hover:text-gray-800">
-                    <FaEllipsisV />
-                  </button> */}
+                 
                 </td>
               </tr>
             ))}

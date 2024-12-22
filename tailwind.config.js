@@ -5,9 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      // Add custom screen size if needed
+      screens: {
+        'lg-custom': '1100px', // Custom screen for 1100px
+      },
+    },
   },
   plugins: [
     require('daisyui'),
-  ],
-}
+  ]
+ 
+};

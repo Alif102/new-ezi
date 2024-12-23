@@ -178,6 +178,318 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
+            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
+          </div>
+          <div>
+            <BsCopy className="cursor-pointer font-bold"  />
+          </div>
+        </div>
+     
+       </div>
+      </div>
+      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+        <div className=" flex justify-between ">
+          <div>
+            <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
+          </div>
+
+          <div className="flex space-x-2 cursor-pointer">
+            {users.slice(0, 3).map((user, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={user.image}
+                  alt={`User ${index + 1}`}
+                  className="w-8 h-8 rounded-full border-2 border-gray-300 transition-transform duration-300 group-hover:translate-y-[-4px]"
+                />
+              </div>
+            ))}
+
+            <div
+              className="w-8 h-8 rounded-full border-2 border-gray-300 tooltip tooltip-right"
+              data-tip={`+${users.length - 3} more`}
+            >
+              {users.length > 3 && <p className="text-gray-700">+{users.length - 3}</p>}
+            </div>
+          </div>
+        </div>
+
+       <div>
+         <div className="flex justify-between items-center mt-5">
+          <div>
             <h1 className="text-xl text-gray-700 font-semibold">Users</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
@@ -360,7 +672,7 @@ const Roles = () => {
         
       </div>
 
-      <RoleTable/>
+      {/* <RoleTable/> */}
 
     
       </div>

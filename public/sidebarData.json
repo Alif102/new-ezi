@@ -1,0 +1,41 @@
+[
+    {
+      "title": "Dashboards",
+      "icon": "GoHome",
+      "subItems": [
+        { "title": "E-Commerce", "path": "/dashboards/ecommerce" },
+        { "title": "CRM", "path": "/dashboards/crm" }
+      ]
+    },
+    {
+      "title": "Email",
+      "icon": "CiMail",
+      "path": "/Email"
+    },
+    {
+      "title": "Users",
+      "icon": "PiUsersLight",
+      "subItems": [
+        { "title": "Lists", "path": "/users/list" }
+      ]
+    },
+    {
+      "title": "Roles & Permissions",
+      "icon": "CiLock",
+      "subItems": [
+        { "title": "Roles", "path": "/roles" },
+        { "title": "Permissions", "path": "/permission" }
+      ]
+    },
+    {
+      "title": "Contact",
+      "icon": "PiPhoneIncomingThin",
+      "path": "/contact"
+    },
+    {
+      "title": "POS",
+      "icon": "PiCalculatorThin",
+      "path": "/pos"
+    }
+  ]
+  

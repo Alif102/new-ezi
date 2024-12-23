@@ -18,3 +18,25 @@
 /* body{
     background: #f7f7f9;
 } */
+
+/* Custom thin scrollbar */
+/* For Webkit browsers (Chrome, Safari) */
+.sidebar-scrollbar::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-track {
+    background: #f7f7f8; /* Track color */
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background-color: green; /* Green thumb color */
+    border-radius: 10px; /* Optional, for rounded corners */
+  }
+  
+  /* For Firefox */
+  .sidebar-scrollbar {
+    scrollbar-color: green #f7f7f8; /* thumb color, track color */
+    scrollbar-width: thin; /* Set to 'thin' for a slim scrollbar */
+  }
+  

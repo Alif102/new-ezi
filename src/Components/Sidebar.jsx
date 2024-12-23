@@ -5,13 +5,11 @@ import { motion } from 'framer-motion';
 import ezi from '../assets/ezi.png';
 import ezicalc from '../assets/ezicalc.png';
 import { VscCircleFilled } from 'react-icons/vsc';
-
 import { GoHome } from 'react-icons/go';
 import { PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
 import { CiLock, CiMail } from 'react-icons/ci';
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+const Sidebar = ({ isCollapsed }) => {
   const [openMenus, setOpenMenus] = useState({});
   const location = useLocation();
 
@@ -24,37 +22,31 @@ const Sidebar = () => {
         { title: 'CRM', path: '/dashboards/crm' },
       ],
     },
-    { title: 'Email', icon: <CiMail size={23} color='text-gray-600' />, path: '/Email' }, 
-
+    { title: 'Email', icon: <CiMail size={23} color="text-gray-600" />, path: '/Email' },
     {
       title: 'Users',
-      icon: <PiUsersLight size={23} color='text-gray-600' />,
-      subItems: [
-        { title: 'Lists', path: '/users/list' },
-      ],
+      icon: <PiUsersLight size={23} color="text-gray-600" />,
+      subItems: [{ title: 'Lists', path: '/users/list' }],
     },
     {
       title: 'Roles & Permissions',
-      icon: <CiLock size={23} color='text-gray-600' />,
+      icon: <CiLock size={23} color="text-gray-600" />,
       subItems: [
         { title: 'Roles', path: '/roles' },
         { title: 'Permissions', path: '/permission' },
       ],
     },
-    { title: 'Contact', icon: <PiPhoneIncomingThin size={23} color='text-gray-600' />, path: '/contact' },
- 
-   
+    { title: 'Contact', icon: <PiPhoneIncomingThin size={23} color="text-gray-600" />, path: '/contact' },
     {
-      title: "POS",
-      path: "/pos",
-      icon: <PiCalculatorThin size={23} color='text-gray-600' />
+      title: 'POS',
+      path: '/pos',
+      icon: <PiCalculatorThin size={23} color="text-gray-600" />,
     },
-   
   ];
 
   const toggleMenu = (index) => {
     setOpenMenus((prevState) => ({
-      [index]: !prevState[index], // Toggle the current menu
+      [index]: !prevState[index],
     }));
   };
 
@@ -65,16 +57,11 @@ const Sidebar = () => {
 
   return (
     <motion.div
-  initial={{ width: isCollapsed ? 56 : 240 }}
-  animate={{ width: isCollapsed ? 56 : 240 }}
-  transition={{ type: 'spring', stiffness: 50, damping: 15 }}
-  className={`h-screen fixed bg-[#f7f7f8] flex flex-col ${
-    !isCollapsed ? 'shadow-xl pr-3' : ''
-  }`}
-  onMouseEnter={() => setIsCollapsed(false)}
-  onMouseLeave={() => setIsCollapsed(true)}
->
-
+      initial={{ width: isCollapsed ? 56 : 240 }}
+      animate={{ width: isCollapsed ? 56 : 240 }}
+      transition={{ type: 'spring', stiffness: 50, damping: 15 }}
+      className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col ${!isCollapsed ? 'shadow-xl pr-3' : ''}`}
+    >
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">
         <img src={ezi} alt="Ezicalc Logo" className="w-8 h-8" />
@@ -95,45 +82,14 @@ const Sidebar = () => {
 
           return (
             <div key={index} className="group">
-
-{index === 2 && !isCollapsed ? (
-  <div className="mt-4 mb-2 text-sm  text-gray-600 uppercase flex items-center justify-center space-x-2">
-    <span className="flex-1 border-t border-gray-200"></span>
-    <span className="px-2 whitespace-nowrap">APP & PAGES</span>
-    <span className="flex-1 border-t border-gray-200"></span>
-  </div>
-) : index === 2 && isCollapsed ? (
-  <div className=" mb-4 mt-7 text-sm font-semibold text-gray-600 uppercase flex items-center justify-center space-x-2">
-    <span className="flex-1 border-t border-gray-200"></span>
-  </div>
-) : null}
-
-{index === 4 && !isCollapsed ? (
-  <div className="mt-4 mb-2 text-sm  text-gray-600 uppercase flex items-center justify-center space-x-2">
-    <span className="flex-1 border-t border-gray-200"></span>
-    <span className="px-2">Components</span>
-    <span className="flex-1 border-t border-gray-200"></span>
-  </div>
-) : index === 4 && isCollapsed ? (
-  <div className="mb-4 mt-7 text-sm font-semibold text-gray-600 uppercase flex items-center justify-center space-x-2">
-    <span className="flex-1 border-t border-gray-200"></span>
-  </div>
-) : null}
-
-
-
-
-
               {item.subItems ? (
                 <div
-                  className={`flex items-center space-x-2 justify-between p-2 cursor-pointer transition ${
-                    isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md text-center' : 'hover:bg-gray-300'
-                  } ${isCollapsed ? 'justify-center' : ''}`}
+                  className={`flex items-center space-x-2 justify-between p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md' : 'hover:bg-gray-300'} ${isCollapsed ? 'justify-center' : ''}`}
                   onClick={() => toggleMenu(index)}
                 >
                   <div className="flex items-center space-x-2">
                     {item.icon}
-                    {!isCollapsed && <span className="whitespace-nowrap text-gray-600">{item.title}</span>}
+                    {!isCollapsed && <span className="whitespace-nowrap text-sm text-gray-600">{item.title}</span>}
                   </div>
                   {!isCollapsed && (
                     <span className="">
@@ -144,14 +100,12 @@ const Sidebar = () => {
               ) : (
                 <NavLink
                   to={item.path}
-                  className={`flex items-center p-2 cursor-pointer transition ${
-                    isParentOrSubActive ? 'bg-gray-300  text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'
-                  } ${isCollapsed ? 'justify-start' : ''}`}
+                  className={`flex items-center p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'} ${isCollapsed ? 'justify-start' : ''}`}
                 >
                   <div className="flex items-center space-x-2">
                     {item.icon}
                     {!isCollapsed && (
-                      <span className="transition-all text-gray-600 duration-300">{item.title}</span>
+                      <span className="transition-all text-gray-600 duration-300 text-sm">{item.title}</span>
                     )}
                   </div>
                 </NavLink>
@@ -170,12 +124,10 @@ const Sidebar = () => {
                       <NavLink
                         key={subIndex}
                         to={subItem.path}
-                        className={`flex items-center space-x-2 my-1 p-2 text-sm ${
-                          isActive ? 'text-white bg-sky-500 rounded-md' : 'hover:bg-gray-300 rounded-md'
-                        }`}
+                        className={`flex items-center space-x-2 my-1 p-2 text-sm ${isActive ? 'text-white bg-sky-500 rounded-md' : 'hover:bg-gray-300 rounded-md'}`}
                       >
-                        <VscCircleFilled size={19} color={isActive ? 'white' : 'gray'} />
-                        <span>{subItem.title}</span>
+                        <VscCircleFilled size={10} className="text-gray-400" />
+                        {!isCollapsed && <span className="whitespace-nowrap text-gray-600">{subItem.title}</span>}
                       </NavLink>
                     );
                   })}

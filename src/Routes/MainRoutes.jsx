@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa'; // Bar icon
 import Home1 from '../Pages/Home1';
 import About1 from '../Pages/About1';
 import Contact from '../Pages/Contact';
@@ -7,29 +8,70 @@ import Sidebar from '../Components/Sidebar';
 import UserList from '../Pages/Users/UserList';
 import Roles from '../Pages/Roles/Roles';
 import Permission from '../Pages/Roles/Permission/Permission';
+import Ecommerce from '../Pages/Ecommerce/Ecommerce';
+import { IoIosNotificationsOutline } from 'react-icons/io';
 
 function MainRoutes() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1100);
+      setIsSidebarOpen(window.innerWidth >= 1100); // Keep sidebar open by default on larger screens
+    };
+
+    handleResize(); // Set the initial state based on screen size
+    window.addEventListener('resize', handleResize); // Update state on resize
+
+    return () => {
+      window.removeEventListener('resize', handleResize); // Cleanup on unmount
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    if (isSmallScreen) {
+      setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar on small screens
+    }
+  };
+
   return (
-    <Router >
+    <Router>
       <div className="flex bg-[#f7f7f9]">
         {/* Sidebar */}
-        <Sidebar />
+        <div className={`lg-custom:block ${isSidebarOpen ? 'block' : 'hidden'}`}>
+          <Sidebar isCollapsed={!isSidebarOpen} />
+        </div>
 
         {/* Main Content */}
-
-        <main className="flex-1 h-screen p-4 bg-[#f7f7f9] ml-0 lg-custom:ml-60 mr-0 lg-custom:mr-24 ">
-          <div className=' flex my-4 justify-between'>
-            <h1>Search</h1>
-
-            <h1>Profile</h1>
+        <main
+          className={`flex-1 h-screen p-4 bg-[#f7f7f9] transition-all ${isSidebarOpen ? 'ml-0 lg-custom:ml-60 sm-custom:ml-60' : 'ml-0'}`}
+        >
+          <div className="flex my-4 justify-between items-center">
+            <div className="flex items-center">
+              <h1 className="text-lg font-bold">Search</h1>
+              {/* Bar Icon (visible on small screens) */}
+              <button
+                className="lg-custom:hidden ml-4 text-2xl"
+                onClick={toggleSidebar}
+              >
+                <FaBars />
+              </button>
+            </div>
+            <div className="flex gap-3 items-center">
+              <IoIosNotificationsOutline size={25} />
+              <img className="w-8 rounded-full" src="https://demos.pixinvent.com/materialize-html-admin-template/assets/img/avatars/1.png" alt="cfcsdf" />
+            </div>
           </div>
-        <Routes>
+
+          <Routes>
             <Route path="/home/home1" element={<Home1 />} />
             <Route path="/about/about1" element={<About1 />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/users/list" element={<UserList />} />
             <Route path="/roles" element={<Roles />} />
             <Route path="/permission" element={<Permission />} />
+            <Route path="/dashboards/ecommerce" element={<Ecommerce />} />
           </Routes>
         </main>
       </div>

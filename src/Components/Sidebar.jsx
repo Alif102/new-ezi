@@ -7,7 +7,7 @@ import ezicalc from '../assets/ezicalc.png';
 import { VscCircleFilled } from 'react-icons/vsc';
 
 import { GoHome } from 'react-icons/go';
-import { PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
+import { PiPhoneIncomingThin } from 'react-icons/pi';
 import { CiLock, CiMail } from 'react-icons/ci';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
@@ -24,13 +24,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
       ],
     },
     { title: 'Email', icon: <CiMail size={23} color="text-gray-600" />, path: '/Email' },
-    {
-      title: 'Users',
-      icon: <PiUsersLight size={23} color="text-gray-600" />,
-      subItems: [
-        { title: 'Lists', path: '/users/list' },
-      ],
-    },
+   
     {
       title: 'Roles & Permissions',
       icon: <CiLock size={23} color="text-gray-600" />,
@@ -40,11 +34,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
       ],
     },
     { title: 'Contact', icon: <PiPhoneIncomingThin size={23} color="text-gray-600" />, path: '/contact' },
-    {
-      title: "POS",
-      path: "/pos",
-      icon: <PiCalculatorThin size={23} color="text-gray-600" />
-    },
+  
   ];
 
   const toggleMenu = (index) => {
@@ -60,13 +50,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
   return (
     <motion.div
-      initial={{ width: isCollapsed ? 56 : 240 }}
-      animate={{ width: isCollapsed ? 56 : 240 }}
-      transition={{ type: 'spring', stiffness: 50, damping: 15 }}
-      className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col ${!isCollapsed ? 'shadow-xl pr-3' : ''}`}
-      onMouseEnter={() => setIsCollapsed(false)}
-      onMouseLeave={() => setIsCollapsed(true)}
-    >
+  initial={{ width: isCollapsed ? 56 : 240 }}
+  animate={{ width: isCollapsed ? 56 : 240 }}
+  // transition={{ type: 'spring', stiffness: 50, damping: 15 }}
+  className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col shadow-lg`}
+  onMouseEnter={() => setIsCollapsed(false)}
+  onMouseLeave={() => setIsCollapsed(true)}
+>
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">
         <img src={ezi} alt="Ezicalc Logo" className="w-8 h-8" />

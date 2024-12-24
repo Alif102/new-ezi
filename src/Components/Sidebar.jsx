@@ -8,7 +8,7 @@ import { VscCircleFilled } from 'react-icons/vsc';
 
 import { GoHome } from 'react-icons/go';
 import { PiAlignBottomThin, PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
-import { CiLock, CiMail } from 'react-icons/ci';
+import { CiLock, CiMail, CiSettings } from 'react-icons/ci';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
   const [openMenus, setOpenMenus] = useState({});
@@ -51,6 +51,11 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
       path: "/report",
       icon: <PiAlignBottomThin size={23} color='text-gray-600' />
     },
+    {
+      title: "Settings",
+      path: "/settings",
+      icon: <CiSettings size={23} color='text-gray-600' />
+    },
   ];
 
   const toggleMenu = (index) => {
@@ -72,7 +77,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
     >
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">
-        <img src={ezi} alt="Ezicalc Logo" className="w-7 ml-2 h-8" />
+        <img src={ezi} alt="Ezicalc Logo" className="w-[30px] ml-2 h-[33px]" />
         {!isCollapsed && (
           <span className="ml-4">
             <img src={ezicalc} alt="logo" className="w-[60%]" />
@@ -81,7 +86,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
       </div>
 
       {/* Menu Items */}
-      <div className="flex-1 ml-4 mt-4 overflow-y-auto">
+      <div className="flex-1 ml-4 mt-4 overflow-x-hidden overflow-y-auto">
         {menuItems.map((item, index) => {
           const isSubmenuOpen = openMenus[index];
           const isParentOrSubActive =

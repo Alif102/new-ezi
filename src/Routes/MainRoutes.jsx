@@ -12,6 +12,7 @@ import Permission from "../Pages/Roles/Permission/Permission";
 import Ecommerce from "../Pages/Ecommerce/Ecommerce";
 import { motion } from "framer-motion";
 import Reports from "../Pages/Reports/Reports";
+import Settings from "../Pages/Settings/Settings";
 
 function MainRoutes() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -135,6 +136,7 @@ function MainRoutes() {
             <Route path="/permission" element={<Permission />} />
             <Route path="/dashboards/ecommerce" element={<Ecommerce />} />
             <Route path="/report" element={<Reports/>} />
+            <Route path="/settings" element={<Settings/>} />
           </Routes>
         </main>
       </div>

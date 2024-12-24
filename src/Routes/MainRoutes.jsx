@@ -63,8 +63,12 @@ function MainRoutes() {
 
   return (
     <Router>
-      <div className="flex bg-[#f7f7f9] h-screen">
-        {/* Sidebar */}
+<div
+  className={`${
+    isSmallScreen ? 'flex-col' : 'flex'
+  } bg-[#f7f7f9] h-screen`}
+>
+     
         <motion.div
           className={`${
             isSidebarOpen
@@ -96,11 +100,11 @@ function MainRoutes() {
         {/* Main Content */}
         <main
           className={`flex-1 p-4 bg-[#f7f7f9] transition-all duration-300 ${
-            isSidebarOpen && !isSmallScreen ? (isCollapsed ? "ml-5" : "ml-2") : "ml-0"
+            isSidebarOpen && !isSmallScreen ? (isCollapsed ? "ml-1" : "ml-2") : "ml-0"
           }`}
         >
-          {/* Top Bar */}
-          <div className="flex justify-between items-center mb-4">
+            {/* Top Bar */}
+            <div className="flex justify-between items-center mb-4">
             <div className="flex items-center">
               <h1 className="text-lg font-bold">Dashboard</h1>
               {/* Bar Icon */}

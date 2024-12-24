@@ -72,9 +72,9 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
     >
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">
-        <img src={ezi} alt="Ezicalc Logo" className="w-7 h-8" />
+        <img src={ezi} alt="Ezicalc Logo" className="w-7 ml-2 h-8" />
         {!isCollapsed && (
-          <span className="ml-2">
+          <span className="ml-4">
             <img src={ezicalc} alt="logo" className="w-[60%]" />
           </span>
         )}
@@ -107,7 +107,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
                   <span className="px-2 text-sm whitespace-nowrap">Components</span>
                   <span className="flex-1 border-t border-gray-200"></span>
                 </div>)
-                : index === 2 && isCollapsed ? (
+                : index === 5 && isCollapsed ? (
                   <div className="   text-sm h-2 mt-4 mb-4    text-gray-600 uppercase flex items-center  justify-center space-x-2">
                     <span className="flex-1  border-t border-gray-200"></span>
                   </div>

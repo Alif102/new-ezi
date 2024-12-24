@@ -7,10 +7,10 @@ import ezicalc from '../assets/ezicalc.png';
 import { VscCircleFilled } from 'react-icons/vsc';
 
 import { GoHome } from 'react-icons/go';
-import { PiPhoneIncomingThin } from 'react-icons/pi';
+import { PiAlignBottomThin, PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
 import { CiLock, CiMail } from 'react-icons/ci';
 
-const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
+const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
   const [openMenus, setOpenMenus] = useState({});
   const location = useLocation();
 
@@ -24,6 +24,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
       ],
     },
     { title: 'Email', icon: <CiMail size={23} color="text-gray-600" />, path: '/Email' },
+    {
+      title: 'Users',
+      icon: <PiUsersLight size={23} color='text-gray-600' />,
+      subItems: [
+        { title: 'Lists', path: '/users/list' },
+      ],
+    },
    
     {
       title: 'Roles & Permissions',
@@ -34,7 +41,16 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
       ],
     },
     { title: 'Contact', icon: <PiPhoneIncomingThin size={23} color="text-gray-600" />, path: '/contact' },
-  
+    {
+      title: "POS",
+      path: "/pos",
+      icon: <PiCalculatorThin size={23} color='text-gray-600' />
+    },
+    {
+      title: "Report",
+      path: "/report",
+      icon: <PiAlignBottomThin size={23} color='text-gray-600' />
+    },
   ];
 
   const toggleMenu = (index) => {
@@ -50,18 +66,15 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
   return (
     <motion.div
-  initial={{ width: isCollapsed ? 56 : 240 }}
-  animate={{ width: isCollapsed ? 56 : 240 }}
-  // transition={{ type: 'spring', stiffness: 50, damping: 15 }}
-  className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col shadow-lg`}
-  onMouseEnter={() => setIsCollapsed(false)}
-  onMouseLeave={() => setIsCollapsed(true)}
->
+      initial={{ width: isCollapsed && !isSmallScreen ? 56 : 240 }}
+      animate={{ width: isCollapsed && !isSmallScreen ? 56 : 250 }}
+      className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col   ${!isCollapsed ? 'shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] pr-3' : ''}`}
+    >
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">
-        <img src={ezi} alt="Ezicalc Logo" className="w-8 h-8" />
+        <img src={ezi} alt="Ezicalc Logo" className="w-7 h-8" />
         {!isCollapsed && (
-          <span className="ml-2 text-xl font-bold">
+          <span className="ml-2">
             <img src={ezicalc} alt="logo" className="w-[60%]" />
           </span>
         )}
@@ -77,7 +90,31 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
           return (
             <div key={index} className="group">
-              {item.subItems ? (
+              {index === 2 && !isCollapsed ? (
+                <div className=" text-sm h-2 mt-4 mb-4 text-gray-600 uppercase flex items-center  justify-center space-x-2">
+                  <span className="flex-1 border-t border-gray-200"></span>
+                  <span className="px-2 text-sm whitespace-nowrap">APP & PAGES</span>
+                  <span className="flex-1 border-t border-gray-200"></span>
+                </div>)
+                : index === 2 && isCollapsed ? (
+                  <div className="   text-sm h-2 mt-4 mb-4    text-gray-600 uppercase flex items-center  justify-center space-x-2">
+                    <span className="flex-1  border-t border-gray-200"></span>
+                  </div>
+                ) : null} 
+              {index === 5 && !isCollapsed ? (
+                <div className=" text-sm h-2 mt-4 mb-4 text-gray-600 uppercase flex items-center  justify-center space-x-2">
+                  <span className="flex-1 border-t border-gray-200"></span>
+                  <span className="px-2 text-sm whitespace-nowrap">Components</span>
+                  <span className="flex-1 border-t border-gray-200"></span>
+                </div>)
+                : index === 2 && isCollapsed ? (
+                  <div className="   text-sm h-2 mt-4 mb-4    text-gray-600 uppercase flex items-center  justify-center space-x-2">
+                    <span className="flex-1  border-t border-gray-200"></span>
+                  </div>
+                ) : null} 
+                
+                
+                   {item.subItems ? (
                 <div
                   className={`flex items-center space-x-2 justify-between p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md text-center' : 'hover:bg-gray-300'
                     } ${isCollapsed ? 'justify-center' : ''}`}
@@ -94,7 +131,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
               ) : (
                 <NavLink
                   to={item.path}
-                  className={`flex items-center p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300  text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'
+                  className={`flex my-3 items-center p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300  text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'
                     } ${isCollapsed ? 'justify-start' : ''}`}
                 >
                   <div className="flex items-center space-x-2">
@@ -119,11 +156,11 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                       <NavLink
                         key={subIndex}
                         to={subItem.path}
-                        className={`flex items-center space-x-2 my-1 p-2 text-sm ${isActive ? 'text-white bg-sky-500 rounded-md' : 'hover:bg-gray-300 rounded-md'}`}
+                        className={`flex items-center space-x-2 my-1 p-2 text-sm ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300 rounded-md'}`}
                       >
-                        <VscCircleFilled size={10} className="text-gray-400" />
+                        <VscCircleFilled size={20} className={` text-gray-400 ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300 '}`} />
                         {!isCollapsed && (
-                          <span className="whitespace-nowrap text-gray-600">{subItem.title}</span>
+                          <span className={`whitespace-nowrap text-gray-600 ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300 rounded-md'}`}>{subItem.title}</span>
                         )}
                       </NavLink>
                     );

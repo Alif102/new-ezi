@@ -10,12 +10,13 @@ import UserList from "../Pages/Users/UserList";
 import Roles from "../Pages/Roles/Roles";
 import Permission from "../Pages/Roles/Permission/Permission";
 import Ecommerce from "../Pages/Ecommerce/Ecommerce";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import Reports from "../Pages/Reports/Reports";
 
 function MainRoutes() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   // Detect screen size
   useEffect(() => {
@@ -50,30 +51,39 @@ function MainRoutes() {
     }
   };
 
+  // Toggle Sidebar on click
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevState) => {
+      if (!prevState) {
+        setIsCollapsed(false); // Ensure sidebar opens fully
+      }
+      return !prevState;
+    });
+  };
+
   return (
     <Router>
       <div className="flex bg-[#f7f7f9] h-screen">
         {/* Sidebar */}
         <motion.div
-  className={`${
-    isSidebarOpen
-      ? isSmallScreen
-        ? "fixed z-40 left-0 top-0 h-full w-64 bg-white shadow-lg"
-        : isCollapsed
-        ? "w-16"
-        : "w-64"
-      : "hidden"
-  } transition-all duration-300 ease-in-out`}
-  onMouseEnter={() => {
-    if (isSidebarOpen) setIsCollapsed(false);
-  }}
-  onMouseLeave={() => {
-    if (isSidebarOpen) setIsCollapsed(true);
-  }}
->
-  <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-</motion.div>
-
+          className={`${
+            isSidebarOpen
+              ? isSmallScreen
+                ? "fixed z-40 left-0 top-0 h-full w-64 bg-white shadow-lg"
+                : isCollapsed
+                ? "w-16"
+                : "w-64"
+              : "hidden"
+          } transition-all duration-300 ease-in-out`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Sidebar
+            isCollapsed={isCollapsed}
+            isSmallScreen={isSmallScreen}
+            setIsCollapsed={setIsCollapsed}
+          />
+        </motion.div>
 
         {/* Backdrop for small screens */}
         {isSidebarOpen && isSmallScreen && (
@@ -86,11 +96,7 @@ function MainRoutes() {
         {/* Main Content */}
         <main
           className={`flex-1 p-4 bg-[#f7f7f9] transition-all duration-300 ${
-            isSidebarOpen && !isSmallScreen
-              ? isCollapsed
-                ? "ml-2"
-                : "ml-2"
-              : "ml-0"
+            isSidebarOpen && !isSmallScreen ? (isCollapsed ? "ml-5" : "ml-2") : "ml-0"
           }`}
         >
           {/* Top Bar */}
@@ -99,12 +105,11 @@ function MainRoutes() {
               <h1 className="text-lg font-bold">Dashboard</h1>
               {/* Bar Icon */}
               <button
-  className="lg-custom:hidden ml-4 text-2xl"
-  onClick={() => setIsSidebarOpen((prev) => !prev)}
->
-  <FaBars />
-</button>
-
+                className="lg-custom:hidden ml-4 text-2xl"
+                onClick={toggleSidebar}
+              >
+                <FaBars />
+              </button>
             </div>
             <div className="flex gap-3 items-center">
               <IoIosNotificationsOutline size={25} />
@@ -125,12 +130,12 @@ function MainRoutes() {
             <Route path="/roles" element={<Roles />} />
             <Route path="/permission" element={<Permission />} />
             <Route path="/dashboards/ecommerce" element={<Ecommerce />} />
+            <Route path="/report" element={<Reports/>} />
           </Routes>
         </main>
       </div>
     </Router>
   );
 }
-
 
 export default MainRoutes;

@@ -672,7 +672,7 @@ const Roles = () => {
         
       </div>
 
-      {/* <RoleTable/> */}
+      <RoleTable/>
 
     
       </div>

@@ -44,7 +44,7 @@ const Permission = () => {
           </svg>
         </label>
         
-        <h1  className=" bg-[#666cff]  text-white px-3 rounded-md flex items-center gap-3"><FaPlus /> Add Permission</h1>
+        <h1  className=" bg-[#666cff]  text-white px-3 py-2 justify-center rounded-md flex items-center gap-3"><FaPlus /> Add Permission</h1>
         </div>
 
 

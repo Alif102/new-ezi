@@ -494,7 +494,7 @@ const Roles = () => {
       </div>
 
 
-      <div className=' flex flex-col md:flex-row gap-4 bg-white py-3 px-2 justify-between'>
+      <div className=' flex flex-col md:flex-row gap-4 bg-white py-3 px-4 rounded-lg justify-between'>
 
 
         <div className='flex items-center gap-2'>

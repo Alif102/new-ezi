@@ -73,7 +73,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
     <motion.div
       initial={{ width: isCollapsed && !isSmallScreen ? 56 : 240 }}
       animate={{ width: isCollapsed && !isSmallScreen ? 56 : 250 }}
-      className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col   ${!isCollapsed ? 'shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] pr-3' : ''}`}
+      className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col   ${!isCollapsed ? 'shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] pr-3' : ''}`}
     >
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">

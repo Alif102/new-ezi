@@ -13,6 +13,12 @@ import Ecommerce from "../Pages/Ecommerce/Ecommerce";
 import { motion } from "framer-motion";
 import Reports from "../Pages/Reports/Reports";
 import Settings from "../Pages/Settings/Settings";
+import Basic from "../Pages/Settings/Basic";
+import Payment from "../Pages/Settings/Payment";
+import Shipping from "../Pages/Settings/Shipping/Shipping";
+import EditShipping from "../Pages/Settings/Shipping/EditShipping";
+import Terms from "../Pages/Settings/Terms/Terms";
+import Operation from "../Pages/Settings/Operation/Operation";
 
 function MainRoutes() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -67,7 +73,7 @@ function MainRoutes() {
 <div
   className={`${
     isSmallScreen ? 'flex-col' : 'flex'
-  } bg-[#f7f7f9] h-screen`}
+  } bg-[#f7f7f9] `}
 >
      
         <motion.div
@@ -137,6 +143,12 @@ function MainRoutes() {
             <Route path="/dashboards/ecommerce" element={<Ecommerce />} />
             <Route path="/report" element={<Reports/>} />
             <Route path="/settings" element={<Settings/>} />
+            <Route path="/settings/basic" element={<Basic/>} />
+            <Route path="/settings/payment" element={<Payment/>} />
+            <Route path="/settings/shipping" element={<Shipping/>} />
+            <Route path="/edit/shipping" element={<EditShipping/>} />
+            <Route path="/settings/terms" element={<Terms/>} />
+            <Route path="/settings/operation" element={<Operation/>} />
           </Routes>
         </main>
       </div>

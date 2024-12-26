@@ -3,6 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js", // Add content path for the datepicker
   ],
   theme: {
     extend: {
@@ -14,6 +15,5 @@ export default {
   },
   plugins: [
     require('daisyui'),
-  ]
- 
+  ],
 };

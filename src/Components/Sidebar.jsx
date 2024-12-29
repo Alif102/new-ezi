@@ -7,7 +7,7 @@ import ezicalc from '../assets/ezicalc.png';
 import { VscCircleFilled } from 'react-icons/vsc';
 
 import { GoHome } from 'react-icons/go';
-import { PiAlignBottomThin, PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
+import { PiAlignBottomThin, PiBagSimpleThin, PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
 import { CiLock, CiMail, CiSettings } from 'react-icons/ci';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
@@ -23,6 +23,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
         { title: 'CRM', path: '/dashboards/crm' },
       ],
     },
+    { title: 'Product', icon: <PiBagSimpleThin size={23} color="text-gray-600" />, path: '/product' },
     { title: 'Email', icon: <CiMail size={23} color="text-gray-600" />, path: '/Email' },
     {
       title: 'Users',

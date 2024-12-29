@@ -19,6 +19,7 @@ import Shipping from "../Pages/Settings/Shipping/Shipping";
 import EditShipping from "../Pages/Settings/Shipping/EditShipping";
 import Terms from "../Pages/Settings/Terms/Terms";
 import Operation from "../Pages/Settings/Operation/Operation";
+import Product from "../Pages/Product/Product";
 
 function MainRoutes() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -134,6 +135,7 @@ function MainRoutes() {
 
           {/* Routes */}
           <Routes>
+            <Route path="/product" element={<Product />} />
             <Route path="/home/home1" element={<Home1 />} />
             <Route path="/about/about1" element={<About1 />} />
             <Route path="/contact" element={<Contact />} />

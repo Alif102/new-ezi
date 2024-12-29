@@ -56,3 +56,10 @@
     scrollbar-width: thin; /* Set to 'thin' for a slim scrollbar */
   }
   
+
+  .my-element:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.5); /* Ring effect */
+    border-color: #6366f1; /* Border color */
+  }
+  

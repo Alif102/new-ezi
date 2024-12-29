@@ -15,6 +15,8 @@ import toast from "react-hot-toast";
 import { RiDeleteBinLine } from "react-icons/ri";
 import RichTextEditor from "../Settings/Terms/TextEd";
 import { FaPlus, FaPlusCircle } from "react-icons/fa";
+import { BsPlusLg } from "react-icons/bs";
+import ProductType from "./ProductType";
 
 const CreateProduct = () => {
 
@@ -483,6 +485,74 @@ const CreateProduct = () => {
   const profit = retailPrice - itemCost;
   const margin = retailPrice > 0 ? ((profit / retailPrice) * 100).toFixed(2) : 0;
 
+
+  // video modal
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [videoURL, setVideoURL] = useState('');
+
+  const handleOpenModal = () => setIsVideoOpen(true);
+  const handleCloseModal = () => setIsVideoOpen(false);
+
+  const handleVideoConfirm = () => {
+    // Handle the URL submission logic
+    console.log("Video URL:", videoURL);
+    setIsVideoOpen(false); // Close the modal after confirmation
+  };
+
+  // image modal
+  const [isImageOpen, setIsImageOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleImageOpenModal = () => setIsImageOpen(true);
+  const handleImageCloseModal = () => setIsImageOpen(false);
+
+
+  // Manage
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [selectedCount, setSelectedCount] = useState(0);
+  const [savedChannels, setSavedChannels] = useState([]);
+  
+  const salesChannels = [
+    "Online Store",
+    "Post Shopping",
+    "Messages",
+    "Google",
+    "WhatsApp",
+    "Facebook",
+    "Telegram",
+    "Live Shopping",
+  ];
+  
+  const [selectedChannels, setSelectedChannels] = useState(
+    Array(salesChannels.length).fill(false)
+  );
+  
+  const toggleManageModal = () => {
+    setIsManageModalOpen(!isManageModalOpen);
+  };
+  
+  const handleManageSelectAll = () => {
+    const allSelected = selectedCount !== salesChannels.length;
+    setSelectedChannels(Array(salesChannels.length).fill(allSelected));
+    setSelectedCount(allSelected ? salesChannels.length : 0);
+  };
+  
+  const handleManageCheckboxChange = (index) => {
+    const updatedSelection = [...selectedChannels];
+    updatedSelection[index] = !updatedSelection[index];
+    setSelectedChannels(updatedSelection);
+    setSelectedCount(updatedSelection.filter(Boolean).length);
+  };
+  
+  const handleSaveChannels = () => {
+    const newSavedChannels = salesChannels.filter(
+      (_, index) => selectedChannels[index]
+    );
+    setSavedChannels(newSavedChannels);
+    toggleManageModal();
+  };
+  
+
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -593,81 +663,16 @@ const CreateProduct = () => {
   return (
     <div id="section-1" className="w-[80%]  mx-auto">
       <div className="w-full shadow py-4 flex pe-4 mb-4">
-        <h2 className="px-4 text-xl font-semibold">Create Product</h2>
+        <h2 className="px-4 text-xl font-semibold">Add Product</h2>
       </div>
 
       <div id="section-1">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         
-          <div className="md:col-span-1 p-4 rounded-lg bg-[#eeeff1] order-1 md:order-3">
-            {/* <div className="mb-3 px-4 py-2 h-28 bg-white flex flex-col  border">
-              <label
-                htmlFor="category_id"
-                className="block text-sm font-medium text-gray-700 required"
-              >
-                Stock Location
-              </label>
-             
-              {errors.stock_location_id && (
-                <p className="text-red-500 text-sm">
-                  {errors.stock_location_id[0]}
-                </p>
-              )}
-            </div> */}
+          <div className="md:col-span-1  p-4 rounded-lg bg-gray-100 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] order-1 md:order-3">
+           
 
-            {/* <div className="relative">
-            
-              <button
-                type="button"
-                onClick={() => {
-                  toggleVideoDrawer();
-                }} className="rounded w-full flex flex-col items-center cursor-pointer bg-white  border py-3"
-              >
-                {selectedVideoName ? (
-                  <video
-                    src={`https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/video/${selectedVideoName}`}
-                    width="350"
-                    height="450"
-                    autoPlay
-                    muted
-                    loop
-                    className="mb-2"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="70"
-                    height="70"
-                    viewBox="0 0 80 80"
-                    fill="none"
-                    className="mb-2"
-                  >
-                    <circle cx="40" cy="40" r="40" fill="#D9D9D9" />
-                    <line
-                      x1="20"
-                      y1="40"
-                      x2="60"
-                      y2="40"
-                      stroke="white"
-                      strokeWidth="4"
-                    />
-                    <line
-                      x1="40"
-                      y1="20"
-                      x2="40"
-                      y2="60"
-                      stroke="white"
-                      strokeWidth="4"
-                    />
-                  </svg>
-                )}
-
-                <div className="mt-2 text-center">Add Video</div>
-              </button>
-            </div> */}
-
+          
             {/* {errors.image && (
                 <p className="text-red-500 text-sm mx-4">{errors.video[0]}</p>
               )} */}
@@ -676,18 +681,148 @@ const CreateProduct = () => {
                 <h1 className=" font-semibold text-lg">Product settings</h1>
 
                 <div>
-                <div className="form-control ">
+                <div className="form-control  ">
     <label className="label cursor-pointer">
       <span className="label-text text-sm font-semibold">Activate</span>
-      <input type="checkbox" className="toggle toggle-md h-3 toggle-primary "  />
+      <input type="checkbox" className="toggle toggle-md scale-75 toggle-primary "  />
     </label>
   </div>
                 </div>
 
-                <div>
-                  <h1>Sales Chanel</h1>
-                  <h1>Manage</h1>
+                <div className=" mt-2">
+                  <h1 className="text-sm font-semibold">Fulfillment</h1>
+
+                  <div className="mb-4 flex items-center">
+                  <input
+                    type="checkbox"
+                    id="exampleCheckbox"
+                    checked={isChecked}
+                    onChange={() => setIsChecked(!isChecked)}
+                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
+                  />
+                  <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-700">
+                  Shipping required
+                  </label>
                 </div>
+                </div>
+
+                <div className="flex flex-col space-y-4">
+  <div className="flex justify-between">
+    <h1 className="text-sm font-semibold">Sales Channel</h1>
+    <h1
+      className=" text-sm hover:underline font-semibold cursor-pointer text-blue-600"
+      onClick={toggleManageModal}
+    >
+      Manage
+    </h1>
+  </div>
+
+  {/* Modal */}
+  {isManageModalOpen && (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white w-96 p-6 rounded-lg shadow-lg">
+        {/* Title with count */}
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold">
+            Select sales channels ({selectedCount}/{salesChannels.length})
+          </h2>
+          <button
+            className="text-blue-600 underline text-sm"
+            onClick={handleManageSelectAll}
+          >
+            {selectedCount === salesChannels.length
+              ? "Unselect All"
+              : "Select All"}
+          </button>
+        </div>
+
+        {/* List of checkboxes */}
+        <div className="space-y-2">
+          {salesChannels.map((channel, index) => (
+            <label
+              key={index}
+              className="flex items-center space-x-2 cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                className="form-checkbox text-blue-600 h-5 w-5"
+                checked={selectedChannels[index]}
+                onChange={() => handleManageCheckboxChange(index)}
+              />
+              <span>{channel}</span>
+            </label>
+          ))}
+        </div>
+
+        {/* Modal Actions */}
+        <div className="flex justify-end mt-4 space-x-2">
+          <button
+            className="px-4 py-2 bg-gray-200 rounded-lg"
+            onClick={toggleManageModal}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+            onClick={handleSaveChannels}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+
+
+<div className="border-t pt-4">
+  <h2 className="text-sm font-semibold">Selected Sales Channels:</h2>
+  {savedChannels.length > 0 ? (
+    <ul className="list-disc pl-5 space-y-1">
+      {savedChannels.map((channel, index) => (
+        <li key={index} className="flex justify-between items-center space-x-2">
+          <span>{channel}</span>
+          {channel === "Online Store" && (
+            <h1 className="text-sm font-semibold text-blue-600 cursor-pointer">
+              Set launch time
+            </h1>
+          )}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-gray-500 text-sm">No channels selected.</p>
+  )}
+</div>
+
+</div>
+
+<div className="mb-4 mt-8">
+      <label for="SPU" className="block text-sm font-medium text-gray-700">SPU</label>
+      <input 
+        type="text" 
+        id="SPU" 
+        name="SPU" 
+        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm my-element sm:text-sm" 
+        placeholder="Enter SPU"
+      />
+    </div>
+<div className="mb-4 mt-8">
+      <label for="Vendor" className="block text-sm font-medium text-gray-700">Vendor</label>
+      <input 
+        type="text" 
+        id="Vendor" 
+        name="Vendor" 
+        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm my-element sm:text-sm" 
+        placeholder="Example : Zara"
+      />
+    </div>
+
+  <div className="mb-4 mt-8">
+  <ProductType/>
+  </div>
+
+
+
            
 
               </div>
@@ -716,7 +851,7 @@ const CreateProduct = () => {
               <input
                 name="name"
                 type="text"
-                className="mt-1 block w-full rounded-lg  border border-gray-300 p-2"
+                className="mt-1 block w-full rounded-lg my-element  border border-gray-300 p-2"
                 id="Product_name"
                 value={name}
                 placeholder="Product Name"
@@ -737,7 +872,7 @@ const CreateProduct = () => {
               <input
                 name="name"
                 type="text"
-                className="mt-1 block w-full rounded-lg  border border-gray-300 p-2"
+                className="mt-1 block w-full rounded-lg  my-element border border-gray-300 p-2"
                 id="Product_name"
                 value={name}
                 placeholder="Product Name"
@@ -768,19 +903,134 @@ const CreateProduct = () => {
 
 
             </div>
+            </div>
     
+{/* Image Div */}
 
-            <div className="mb-4 " id="">
-              <label
-                htmlFor="category_id"
-                className="block text-sm my-4 font-medium text-gray-700 required"
+            <div className="mb-4 bg-white p-5 my-10 rounded-lg " id="">
+              <div className=" flex justify-between my-3">
+              
+              <h1
+      
+        className=" font-semibold"
+      >
+        Image/Video
+      </h1>
+
+   
+                <div className="  flex gap-4">
+                <h1
+        onClick={handleOpenModal}
+        className="cursor-pointer font-semibold  text-blue-500"
+      >
+        Add Video URL
+      </h1>
+
+      {isVideoOpen && (
+        <div className="fixed inset-0 z-20 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white  p-6 rounded-lg shadow-lg w-full mx-5  md:w-1/2">
+            <h2 className="text-sm mb-4">Paste the video URL below</h2>
+            <input
+              type="url"
+              value={videoURL}
+              onChange={(e) => setVideoURL(e.target.value)}
+              placeholder="https://youtube.com/video"
+              className="w-full p-2 border border-gray-300 rounded mb-4"
+            />
+            <div className="flex justify-end  text-sm gap-2">
+              <button
+                onClick={handleCloseModal}
+                className="px-3 py-2 bg-gray-50 border border-gray-300 text-black rounded"
               >
-                Image
-              </label>
+                Cancel
+              </button>
+              <button
+                onClick={handleVideoConfirm}
+                className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+                  <h1
+        onClick={handleImageOpenModal}
+        className="cursor-pointer font-semibold  text-blue-500"
+      >
+        Add multimedia Files
+      </h1>
+
+      {isImageOpen && (
+        <div className="fixed inset-0 z-20 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full mx-6 md:w-1/2 ">
+            <h2 className="text-lg mb-4">Select from file library</h2>
+
+            <div className=" flex gap-3 my-4">
+
+           
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search file Name/Format..."
+              className="w-full px-3 py-2 border border-gray-300 rounded my-element"
+            />
+
+           
+                        
+            
+                                <div className="w-full max-w-xs">
+              <select id="product-type" name="product-type" className=" block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm my-element sm:text-sm">
+                <option disabled value="File">File Type</option>
+                <option value="Image">Image</option>
+              
+              </select>
+            </div>
+                           
+            </div>
+<div className="relative bg-[#f7f7f9] border  w-40   border-dashed my-4 p-5">
+<label htmlFor="fileInput" className="cursor-pointer ">
+       <div className=" flex items-center flex-col gap-3">
+       <BsPlusLg size={30} />
+       <h1>Upload Image</h1>
+       </div>
+      </label>
+</div>
+           
+            
+                              
+            
+            
+                       
+
+
+
+
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={handleImageCloseModal}
+                className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleImageCloseModal}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Complete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+                </div>
+              </div>
 
               <div
-  className={`relative bg-[#f7f7f9]  border-dashed border-2 rounded-lg p-4 ${
-    isDragging ? "border-blue-500 bg-blue-100" : "border-gray-300"
+  className={`relative bg-[#f7f7f9]   border-dashed border-2 rounded-lg p-4 ${
+    isDragging ? "border-blue-500 bg-blue-100" : "border-gray-300 hover:border-blue-500 hover:text-blue-500"
   }`}
   onDragOver={(e) => {
     e.preventDefault();
@@ -811,7 +1061,7 @@ const CreateProduct = () => {
               className="w-20 h-20 border border-gray-300 object-cover rounded"
             />
             <button
-              className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+              className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs z-10"
               onClick={() => deleteImage(index)}
             >
               x
@@ -824,33 +1074,12 @@ const CreateProduct = () => {
       </div>
     ) : (
       <label htmlFor="fileInput" className="cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="70"
-          height="70"
-          viewBox="0 0 80 80"
-          fill="none"
-          className="mb-2"
-        >
-          <circle cx="40" cy="40" r="40" fill="#D9D9D9" />
-          <line
-            x1="20"
-            y1="40"
-            x2="60"
-            y2="40"
-            stroke="white"
-            strokeWidth="4"
-          />
-          <line
-            x1="40"
-            y1="20"
-            x2="40"
-            y2="60"
-            stroke="white"
-            strokeWidth="4"
-          />
-        </svg>
+       <div className=" flex items-center flex-col gap-3">
+       <BsPlusLg size={30} />
+       <h1>Add Image (or Drag and Drop)</h1>
+       </div>
       </label>
+      
     )}
   </button>
   <input
@@ -867,6 +1096,7 @@ const CreateProduct = () => {
     </div>
   )}
 </div>
+<p className=" text-gray-500 text-sm mt-4 mb-8">Supports files in .jpg, .png, .webp, .gif, and .mp4 formats. Files smaller than 4MB work better, and .gif files shouldn't be larger than 8MB. Maximum file size 10MB.</p>
 
 
 
@@ -875,48 +1105,10 @@ const CreateProduct = () => {
                 <p className="text-red-500 text-sm mx-4">{errors.image[0]}</p>
               )}
             </div>
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
-              id="section-3"
-            >
-              <div>
-                <div className="mb-3 px-4 py-2 h-28 bg-white flex flex-col  border">
-                  <label
-                    htmlFor="category_id"
-                    className="block text-sm font-medium text-gray-700 required"
-                  >
-                    Product Category
-                  </label>
-                  {/* <CategoryItems onCategoryIdChange={handleCategoryIdChange} />
-                  {errors.category_id && (
-                    <p className="text-red-500 text-sm">
-                      {errors.category_id[0]}
-                    </p>
-                  )} */}
-                </div>
-              </div>
 
-              <div>
-                <div className="mb-3 px-4 py-2 h-28 bg-white flex flex-col  border">
-                  <label
-                    htmlFor="product_status"
-                    className="block text-sm font-medium text-gray-700 required"
-                  >
-                    Product Status
-                  </label>
-                  <select
-                    name="product_status"
-                    id="product_status"
-                    className="form-select rounded-lg shadow border-gray-300 py-1 px-2"
-                    onChange={(e) => setStatus(e.target.value)}
-                  >
-                    <option value="1">On</option>
-                    <option value="0">Off</option>
-                  </select>
-                  <span className="text-danger error-text product_status_error"></span>
-                </div>
-              </div>
-            </div>
+
+
+            
 
             {/* variation code start */}
 
@@ -1009,69 +1201,7 @@ const CreateProduct = () => {
 
                 {!hasVariations && (
                   <div className="container-fluid">
-                    {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mx-5">
-                      <div className="mb-2">
-                        <label
-                          htmlFor="Selling price"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Selling Price
-                        </label>
-                        <input
-                          type="number"
-                          className="form-control rounded-lg shadow border border-gray-300 p-2 w-full"
-                          id="price"
-                          placeholder="Enter price"
-                          aria-label="Price"
-                          onChange={(e) => setPrice(e.target.value)}
-                        />
-                        {errors.price && (
-                          <p className="text-red-500 text-sm">
-                            {errors.price[0]}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="mb-2">
-                        <label
-                          htmlFor="stock"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Stock
-                        </label>
-                        <input
-                          type="number"
-                          className="form-control rounded-lg shadow border border-gray-300 p-2 w-full"
-                          id="stock"
-                          placeholder="Enter stock"
-                          aria-label="Stock"
-                          onChange={(e) => setStock(e.target.value)}
-                        />
-                        {errors.stock && (
-                          <p className="text-red-500 text-sm">
-                            {errors.stock[0]}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="mb-2">
-                        <label
-                          htmlFor="code"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Code
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control rounded-lg shadow border border-gray-300 p-2 w-full"
-                          id="code"
-                          placeholder="Enter code"
-                          aria-label="Code"
-                          value={code} // Set the input field value to the generated code
-                          onChange={(e) => setCode(e.target.value)}
-                        />
-                      </div>
-                    </div> */}
+                
 
 <div className="mx-4">
      
@@ -1150,7 +1280,7 @@ const CreateProduct = () => {
         type="text" 
         id="sku" 
         name="sku" 
-        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm my-element sm:text-sm" 
         placeholder="Enter SKU"
       />
     </div>
@@ -1162,7 +1292,7 @@ const CreateProduct = () => {
         type="text" 
         id="barcode" 
         name="barcode" 
-        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm my-element sm:text-sm" 
         placeholder="Enter Barcode"
       />
     </div>
@@ -1174,7 +1304,7 @@ const CreateProduct = () => {
         type="number" 
         id="quantity" 
         name="quantity" 
-        className="mt-1 block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+        className="mt-1 block w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm my-element sm:text-sm" 
         placeholder="Enter Quantity"
       />
     </div>
@@ -1492,7 +1622,7 @@ const CreateProduct = () => {
               </button>
             </div>
          
-         </div>
+        
           </form>
         </div>
 

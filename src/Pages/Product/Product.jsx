@@ -17,6 +17,7 @@ import RichTextEditor from "../Settings/Terms/TextEd";
 import { FaPlus, FaPlusCircle } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 import ProductType from "./ProductType";
+import { PiWarningCircleLight } from "react-icons/pi";
 
 const CreateProduct = () => {
 
@@ -551,7 +552,37 @@ const CreateProduct = () => {
     setSavedChannels(newSavedChannels);
     toggleManageModal();
   };
-  
+  const [isLaunchModalOpen, setIsLaunchModalOpen] = useState(false);
+  const [launchTime, setLaunchTime] = useState(""); // State for launch time
+  const [selectedChannel, setSelectedChannel] = useState(""); // State for selected channel
+  const [launchTimes, setLaunchTimes] = useState({}); // Store launch times for channels
+
+
+  const handleLaunchOpenModal = (channel) => {
+    setSelectedChannel(channel);
+    setIsLaunchModalOpen(true);
+  };
+
+  const handleLaunchCloseModal = () => {
+    setIsLaunchModalOpen(false);
+    setSelectedChannel("");
+  };
+
+  const handleSaveLaunchTime = () => {
+    // Update the launch time for the selected channel
+    setLaunchTimes((prev) => ({
+      ...prev,
+      [selectedChannel]: launchTime,
+    }));
+    setIsLaunchModalOpen(false); // Close modal after saving
+  };
+
+
+  // Collections
+  const [isCollectionsModalOpen, setIsCollectionsModalOpen] = useState(false);
+
+  const openCollectionsModal = () => setIsCollectionsModalOpen(true);
+  const closeCollectionsModal = () => setIsCollectionsModalOpen(false);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -661,7 +692,7 @@ const CreateProduct = () => {
   // handle Svae .............
 
   return (
-    <div id="section-1" className="w-[80%]  mx-auto">
+    <div id="section-1" className="md:w-[80%] w-[100%]  mx-auto">
       <div className="w-full shadow py-4 flex pe-4 mb-4">
         <h2 className="px-4 text-xl font-semibold">Add Product</h2>
       </div>
@@ -669,15 +700,12 @@ const CreateProduct = () => {
       <div id="section-1">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         
-          <div className="md:col-span-1  p-4 rounded-lg bg-gray-100 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] order-1 md:order-3">
+          <div className="md:col-span-1  rounded-lg order-6 md:order-3">
            
 
           
-            {/* {errors.image && (
-                <p className="text-red-500 text-sm mx-4">{errors.video[0]}</p>
-              )} */}
-
-              <div>
+       
+              <div className="bg-[#f3f3f2] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pb-4 px-2">
                 <h1 className=" font-semibold text-lg">Product settings</h1>
 
                 <div>
@@ -692,7 +720,7 @@ const CreateProduct = () => {
                 <div className=" mt-2">
                   <h1 className="text-sm font-semibold">Fulfillment</h1>
 
-                  <div className="mb-4 flex items-center">
+                  <div className="mb-4 mt-2 flex items-center">
                   <input
                     type="checkbox"
                     id="exampleCheckbox"
@@ -782,16 +810,51 @@ const CreateProduct = () => {
         <li key={index} className="flex justify-between items-center space-x-2">
           <span>{channel}</span>
           {channel === "Online Store" && (
-            <h1 className="text-sm font-semibold text-blue-600 cursor-pointer">
+            <h1  onClick={() => handleLaunchOpenModal(channel)} className="text-sm font-semibold text-blue-600 cursor-pointer">
               Set launch time
             </h1>
           )}
         </li>
       ))}
     </ul>
+    
   ) : (
     <p className="text-gray-500 text-sm">No channels selected.</p>
   )}
+   <div className="mt-4">
+        {Object.entries(launchTimes).map(([channel, time]) => (
+          <div key={channel} className=" flex items-center  gap-1 text-gray-600 bg-gray-200 p-3 text-sm rounded-lg">
+          <PiWarningCircleLight color="blue" size={26}  />  <h1>{channel}:</h1> {time || "No launch time set"}
+          </div>
+        ))}
+      </div>
+      {isLaunchModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-md shadow-md w-96">
+            <h2 className="text-lg font-semibold mb-4">Set Launch Time (GMT+08:00)</h2>
+            <input
+              type="datetime-local"
+              value={launchTime}
+              onChange={(e) => setLaunchTime(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 w-full mb-4"
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={handleLaunchCloseModal}
+                className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveLaunchTime}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 </div>
 
 </div>
@@ -820,12 +883,77 @@ const CreateProduct = () => {
   <div className="mb-4 mt-8">
   <ProductType/>
   </div>
+  <div className="mb-4 mt-8">
+
+  <div>
+      {/* Header */}
+      <div className="flex justify-between gap-1 items-center">
+        <h1 className="text-sm font-medium text-gray-700 mb-1">Collections</h1>
+        <h1
+          className="text-sm font-medium text-blue-700 mb-1 cursor-pointer"
+          onClick={openCollectionsModal}
+        >
+          Add New
+        </h1>
+      </div>
+
+      <p className=" text-gray-500 text-sm">If you've turned on Smart Collections, we'll automatically match it with items that fit.</p>
+
+      {/* Modal */}
+      {isCollectionsModalOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg w-full md:w-1/2 mx-5  p-6 shadow-lg">
+            <h1 className=" font-semibold text-lg my-3">Select product collections</h1>
+            <h1 className=" mb-4">Applied categorization</h1>
+            <p className=" text-gray-500 text-sm my-3">If you've turned on Smart Collections, we'll automatically match it with items that fit.</p>
+           
+            <input
+              type="text"
+              placeholder="Search Collections"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md my-element"
+            />
+            <div className="flex justify-end gap-2 mt-6">
+              <button
+                onClick={closeCollectionsModal}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={closeCollectionsModal}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+
+  </div>
 
 
 
            
 
               </div>
+
+              <div className=" my-8 rounded-lg bg-[#f3f3f2] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pt-2 pb-4 px-2">
+                <h1>Theme template</h1>
+                    <div className="w-full max-w-xs">
+                  <select id="product-type" name="product-type" className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="Default">Default</option>
+                    <option value="Manual">Manual</option>
+                  
+                  </select>
+                </div>
+                <p className=" text-sm my-2 text-gray-500">Choose how you'd like the card to look like</p>
+              </div>
+
+
+
           </div>
 
 
@@ -1605,7 +1733,7 @@ const CreateProduct = () => {
 
             <div className="flex justify-end mt-4">
               <button
-                className="btn bg-[#444CB4] hover:bg-[#28DEFC] text-white px-5 text-lg"
+                className="btn bg-[#3d43a5] hover:bg-[#28DEFC] text-white px-5 text-lg"
                 type="submit"
               >
                 {loading ? (
@@ -1617,7 +1745,7 @@ const CreateProduct = () => {
                     <span className="px-2">Saving...</span>
                   </div>
                 ) : (
-                  <>save</>
+                  <>Add</>
                 )}
               </button>
             </div>

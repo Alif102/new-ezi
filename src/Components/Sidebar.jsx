@@ -10,52 +10,51 @@ import { GoHome } from 'react-icons/go';
 import { PiAlignBottomThin, PiBagSimpleThin, PiCalculatorThin, PiPhoneIncomingThin, PiUsersLight } from 'react-icons/pi';
 import { CiLock, CiMail, CiSettings } from 'react-icons/ci';
 
-const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
+const Sidebar = ({ isCollapsed, isDarkMode, isSmallScreen }) => {
   const [openMenus, setOpenMenus] = useState({});
   const location = useLocation();
 
   const menuItems = [
     {
       title: 'Dashboards',
-      icon: <GoHome size={23} className="text-gray-600" />,
+      icon: <GoHome size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />,
       subItems: [
         { title: 'E-Commerce', path: '/dashboards/ecommerce' },
         { title: 'CRM', path: '/dashboards/crm' },
       ],
     },
-    { title: 'Product', icon: <PiBagSimpleThin size={23} color="text-gray-600" />, path: '/product' },
-    { title: 'Email', icon: <CiMail size={23} color="text-gray-600" />, path: '/Email' },
+    { title: 'Product', icon: <PiBagSimpleThin size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />, path: '/product' },
+    { title: 'Email', icon: <CiMail size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />, path: '/Email' },
     {
       title: 'Users',
-      icon: <PiUsersLight size={23} color='text-gray-600' />,
+      icon: <PiUsersLight size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />,
       subItems: [
         { title: 'Lists', path: '/users/list' },
       ],
     },
-   
     {
       title: 'Roles & Permissions',
-      icon: <CiLock size={23} color="text-gray-600" />,
+      icon: <CiLock size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />,
       subItems: [
         { title: 'Roles', path: '/roles' },
         { title: 'Permissions', path: '/permission' },
       ],
     },
-    { title: 'Contact', icon: <PiPhoneIncomingThin size={23} color="text-gray-600" />, path: '/contact' },
+    { title: 'Contact', icon: <PiPhoneIncomingThin size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />, path: '/contact' },
     {
       title: "POS",
       path: "/pos",
-      icon: <PiCalculatorThin size={23} color='text-gray-600' />
+      icon: <PiCalculatorThin size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />
     },
     {
       title: "Report",
       path: "/report",
-      icon: <PiAlignBottomThin size={23} color='text-gray-600' />
+      icon: <PiAlignBottomThin size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />
     },
     {
       title: "Settings",
       path: "/settings",
-      icon: <CiSettings size={23} color='text-gray-600' />
+      icon: <CiSettings size={23} className={isDarkMode ? 'text-white' : 'text-gray-600'} />
     },
   ];
 
@@ -74,7 +73,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
     <motion.div
       initial={{ width: isCollapsed && !isSmallScreen ? 56 : 240 }}
       animate={{ width: isCollapsed && !isSmallScreen ? 56 : 250 }}
-      className={`fixed top-0 left-0 h-full bg-[#f7f7f8] flex flex-col   ${!isCollapsed ? 'shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] pr-3' : ''}`}
+      className={`fixed top-0 left-0 h-full flex flex-col ${isDarkMode ? 'bg-[#30334e] text-white' : 'bg-[#f7f7f8]'} ${!isCollapsed ? 'shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] pr-3' : ''}`}
     >
       {/* Logo */}
       <div className="flex ml-4 mt-4 items-center">
@@ -96,39 +95,46 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
 
           return (
             <div key={index} className="group">
-              {index === 2 && !isCollapsed ? (
-                <div className=" text-sm h-2 mt-4 mb-4 text-gray-600 uppercase flex items-center  justify-center space-x-2">
-                  <span className="flex-1 border-t border-gray-200"></span>
-                  <span className="px-2 text-sm whitespace-nowrap">APP & PAGES</span>
-                  <span className="flex-1 border-t border-gray-200"></span>
-                </div>)
-                : index === 2 && isCollapsed ? (
-                  <div className="   text-sm h-2 mt-4 mb-4    text-gray-600 uppercase flex items-center  justify-center space-x-2">
-                    <span className="flex-1  border-t border-gray-200"></span>
-                  </div>
-                ) : null} 
-              {index === 5 && !isCollapsed ? (
-                <div className=" text-sm h-2 mt-4 mb-4 text-gray-600 uppercase flex items-center  justify-center space-x-2">
-                  <span className="flex-1 border-t border-gray-200"></span>
-                  <span className="px-2 text-sm whitespace-nowrap">Components</span>
-                  <span className="flex-1 border-t border-gray-200"></span>
-                </div>)
-                : index === 5 && isCollapsed ? (
-                  <div className="   text-sm h-2 mt-4 mb-4    text-gray-600 uppercase flex items-center  justify-center space-x-2">
-                    <span className="flex-1  border-t border-gray-200"></span>
-                  </div>
-                ) : null} 
-                
-                
-                   {item.subItems ? (
+             {index === 2 && !isCollapsed ? (
+  <div
+    className={`text-sm h-2 mt-4 mb-4 ${isDarkMode ? 'text-white' : 'text-gray-600'} uppercase flex items-center justify-center space-x-2`}
+  >
+    <span className="flex-1 border-t border-gray-200"></span>
+    <span className="px-2 text-sm whitespace-nowrap">APP & PAGES</span>
+    <span className="flex-1 border-t border-gray-200"></span>
+  </div>
+) : index === 2 && isCollapsed ? (
+  <div
+    className={`text-sm h-2 mt-4 mb-4 ${isDarkMode ? 'text-white' : 'text-gray-600'} uppercase flex items-center justify-center space-x-2`}
+  >
+    <span className="flex-1 border-t border-gray-200"></span>
+  </div>
+) : null}
+
+{index === 5 && !isCollapsed ? (
+  <div
+    className={`text-sm h-2 mt-4 mb-4 ${isDarkMode ? 'text-white' : 'text-gray-600'} uppercase flex items-center justify-center space-x-2`}
+  >
+    <span className="flex-1 border-t border-gray-200"></span>
+    <span className="px-2 text-sm whitespace-nowrap">Components</span>
+    <span className="flex-1 border-t border-gray-200"></span>
+  </div>
+) : index === 5 && isCollapsed ? (
+  <div
+    className={`text-sm h-2 mt-4 mb-4 ${isDarkMode ? 'text-white' : 'text-gray-600'} uppercase flex items-center justify-center space-x-2`}
+  >
+    <span className="flex-1 border-t border-gray-200"></span>
+  </div>
+) : null}
+
+              {item.subItems ? (
                 <div
-                  className={`flex items-center space-x-2 justify-between p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md text-center' : 'hover:bg-gray-300'
-                    } ${isCollapsed ? 'justify-center' : ''}`}
+                  className={`flex items-center space-x-2 justify-between p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md text-center' : 'hover:bg-gray-300'} ${isCollapsed ? 'justify-center' : ''}`}
                   onClick={() => toggleMenu(index)}
                 >
                   <div className="flex items-center space-x-2">
                     {item.icon}
-                    {!isCollapsed && <span className="whitespace-nowrap text-sm text-gray-600">{item.title}</span>}
+                    {!isCollapsed && <span className={`whitespace-nowrap text-sm ${isDarkMode ? 'text-white' : 'text-gray-600'}`}>{item.title}</span>}
                   </div>
                   {!isCollapsed && (
                     <span className="">{isSubmenuOpen ? <FaChevronDown size={16} /> : <FaChevronRight size={16} />}</span>
@@ -137,13 +143,12 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
               ) : (
                 <NavLink
                   to={item.path}
-                  className={`flex my-3 items-center p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300  text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'
-                    } ${isCollapsed ? 'justify-start' : ''}`}
+                  className={`flex my-3 items-center p-2 cursor-pointer transition ${isParentOrSubActive ? 'bg-gray-300 text-gray-800 rounded-md' : 'hover:bg-gray-300 rounded-md'} ${isCollapsed ? 'justify-start' : ''}`}
                 >
                   <div className="flex items-center space-x-2">
                     {item.icon}
                     {!isCollapsed && (
-                      <span className="transition-all text-gray-600 duration-300 text-sm">{item.title}</span>
+                      <span className={`transition-all text-gray-600 duration-300 text-sm ${isDarkMode ? 'text-white' : ''}`}>{item.title}</span>
                     )}
                   </div>
                 </NavLink>
@@ -164,9 +169,9 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isSmallScreen }) => {
                         to={subItem.path}
                         className={`flex items-center space-x-2 my-1 p-2 text-sm ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300 rounded-md'}`}
                       >
-                        <VscCircleFilled size={20} className={` text-gray-400 ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300 '}`} />
+                        <VscCircleFilled size={20} className={`text-gray-400 ${isActive ? 'text-white bg-[#5393e4]' : ''}`} />
                         {!isCollapsed && (
-                          <span className={`whitespace-nowrap text-gray-600 ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300 rounded-md'}`}>{subItem.title}</span>
+                          <span className={`whitespace-nowrap text-gray-600 ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300'}`}>{subItem.title}</span>
                         )}
                       </NavLink>
                     );

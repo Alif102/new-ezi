@@ -68,14 +68,25 @@ function MainRoutes() {
       return !prevState;
     });
   };
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  };
 
   return (
     <Router>
 <div
   className={`${
     isSmallScreen ? 'flex-col' : 'flex'
-  } bg-[#f7f7f9] `}
+  } ${isDarkMode ? 'bg-[#282a42]' : 'bg-[#f7f7f9]'} `}
 >
+
      
         <motion.div
           className={`${
@@ -90,7 +101,7 @@ function MainRoutes() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Sidebar
+          <Sidebar isDarkMode={isDarkMode} 
             isCollapsed={isCollapsed}
             isSmallScreen={isSmallScreen}
             setIsCollapsed={setIsCollapsed}
@@ -100,42 +111,52 @@ function MainRoutes() {
         {/* Backdrop for small screens */}
         {isSidebarOpen && isSmallScreen && (
           <div
-            className="fixed inset-0 z-30 bg-black bg-opacity-50"
+            className="fixed inset-0 z-30 bg-[#282a42] bg-opacity-50"
             onClick={() => setIsSidebarOpen(false)}
           ></div>
         )}
 
         {/* Main Content */}
         <main
-          className={`flex-1 p-4 bg-[#f7f7f9] transition-all duration-300 ${
-            isSidebarOpen && !isSmallScreen ? (isCollapsed ? "ml-1" : "ml-2") : "ml-0"
-          }`}
-        >
+  className={`flex-1 p-4 transition-all duration-300 ${
+    isDarkMode ? "bg-[#282a42]" : "bg-[#f7f7f9]"
+  } ${
+    isSidebarOpen && !isSmallScreen ? (isCollapsed ? "ml-1" : "ml-2") : "ml-0"
+  }`}
+>
             {/* Top Bar */}
             <div className="flex justify-between items-center mb-4">
-            <div className="flex items-center">
-              <h1 className="text-lg font-bold">Dashboard</h1>
-              {/* Bar Icon */}
-              <button
-                className="lg-custom:hidden ml-4 text-2xl"
-                onClick={toggleSidebar}
-              >
-                <FaBars />
-              </button>
-            </div>
-            <div className="flex gap-3 items-center">
-              <IoIosNotificationsOutline size={25} />
-              <img
-                className="w-8 rounded-full"
-                src="https://demos.pixinvent.com/materialize-html-admin-template/assets/img/avatars/1.png"
-                alt="user"
-              />
-            </div>
-          </div>
+      <div className="flex items-center">
+        <h1 className="text-lg font-bold">Dashboard</h1>
+        {/* Bar Icon */}
+        <button
+          className="lg-custom:hidden ml-4 text-2xl"
+          onClick={toggleSidebar}
+        >
+          <FaBars />
+        </button>
+      </div>
+      <div className="flex gap-3 items-center">
+      
+        {/* Theme Toggle Button (DaisyUI) */}
+        <button
+          className="btn btn-ghost"
+          onClick={toggleTheme}
+        >
+          {isDarkMode ? "🌙" : "🌞"}
+        </button>
+        <IoIosNotificationsOutline size={25} />
+        <img
+          className="w-8 rounded-full"
+          src="https://demos.pixinvent.com/materialize-html-admin-template/assets/img/avatars/1.png"
+          alt="user"
+        />
+      </div>
+    </div>
 
           {/* Routes */}
           <Routes>
-            <Route path="/product" element={<Product />} />
+            <Route path="/product" element={<Product isDarkMode={isDarkMode} />} />
             <Route path="/home/home1" element={<Home1 />} />
             <Route path="/about/about1" element={<About1 />} />
             <Route path="/contact" element={<Contact />} />

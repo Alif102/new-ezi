@@ -32,7 +32,7 @@ const RichTextEditor = () => {
   };
 
   return (
-    <div className="editor-container">
+    <div className="editor-container ">
    
     
       <ReactQuill className=" h-28 pb-9"

@@ -13,11 +13,12 @@ import {
   FaTable,
 } from "react-icons/fa";
 
-const TextEditor = () => {
+const TextEditor = ({ isDarkMode }) => {
   const [fontSize, setFontSize] = useState("16px");
   const [fontFamily, setFontFamily] = useState("Arial");
-  const [backgroundColor, setBackgroundColor] = useState("#ffffff");
-  const [textColor, setTextColor] = useState("#000000");
+  const [backgroundColor, setBackgroundColor] = useState(isDarkMode ? "#000000" : "000000"); 
+
+  const [textColor, setTextColor] = useState("gray");
   const editorRef = React.useRef(null);
 
   const applyStyle = (command, value = null) => {
@@ -72,7 +73,6 @@ const TextEditor = () => {
         const cell = row.insertCell();
         cell.style.border = "1px solid #ddd";
         cell.style.padding = "8px";
-        // cell.innerText = `Row ${i + 1}, Cell ${j + 1}`;
       }
     }
 
@@ -81,11 +81,15 @@ const TextEditor = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="bg-white shadow-lg p-4 rounded-xl flex flex-wrap items-center justify-between space-x-4 mb-4">
+    <div
+      className={`py-6 ${isDarkMode ? 'bg-[#30334e]' : 'bg-gray-100'} transition-all duration-300`}
+    >
+      <div
+        className={`shadow-lg p-4 rounded-xl flex flex-wrap items-center justify-between space-x-4 mb-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+      >
         <div className="flex items-center space-x-4">
           <select
-            className="border border-gray-300 rounded-md px-2 py-1 bg-gray-50"
+            className={`border border-gray-300 rounded-md px-2 py-1 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-50 text-black'}`}
             value={fontFamily}
             onChange={(e) => {
               setFontFamily(e.target.value);
@@ -99,7 +103,7 @@ const TextEditor = () => {
           </select>
 
           <select
-            className="border border-gray-300 rounded-md px-2 py-1 bg-gray-50"
+            className={`border border-gray-300 rounded-md px-2 py-1 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-50 text-black'}`}
             value={fontSize}
             onChange={(e) => {
               setFontSize(e.target.value);
@@ -185,19 +189,7 @@ const TextEditor = () => {
           >
             <FaTable />
           </button>
-          <label className="p-2 rounded-md hover:bg-gray-200 transition cursor-pointer">
-            <FaImage />
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  insertImage(e.target.files[0]);
-                }
-              }}
-            />
-          </label>
+       
         </div>
 
         <div className="flex items-center space-x-4">
@@ -221,18 +213,18 @@ const TextEditor = () => {
       </div>
 
       <div
-        ref={editorRef}
-        contentEditable
-        className="w-full bg-white shadow-lg border border-gray-300 rounded-xl p-6 mt-4 min-h-[400px]"
-        style={{
-          fontSize,
-          fontFamily,
-          backgroundColor,
-          color: textColor,
-        }}
-      >
-        
-      </div>
+  ref={editorRef}
+  contentEditable
+  className={`w-full shadow-lg border border-gray-300 rounded-xl p-6 mt-4 min-h-[200px] ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+  style={{
+    fontSize,
+    fontFamily,
+    backgroundColor,
+    color: textColor,
+  }}
+>
+</div>
+
     </div>
   );
 };

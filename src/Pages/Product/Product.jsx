@@ -18,9 +18,12 @@ import { FaPlus, FaPlusCircle } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 import ProductType from "./ProductType";
 import { PiWarningCircleLight } from "react-icons/pi";
+import { TfiArrowLeft } from "react-icons/tfi";
+import TextEditor from "../Settings/Terms/TextEditor";
 
-const CreateProduct = () => {
+const CreateProduct = ({isDarkMode}) => {
 
+  console.log(isDarkMode)
   const [images, setImages] = useState([]);
 
 
@@ -42,6 +45,7 @@ const CreateProduct = () => {
 
 
     const [isChecked, setIsChecked] = useState(false);
+    const [isTrackChecked, setTrackIsChecked] = useState(false);
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -552,6 +556,9 @@ const CreateProduct = () => {
     setSavedChannels(newSavedChannels);
     toggleManageModal();
   };
+
+
+  // Launch
   const [isLaunchModalOpen, setIsLaunchModalOpen] = useState(false);
   const [launchTime, setLaunchTime] = useState(""); // State for launch time
   const [selectedChannel, setSelectedChannel] = useState(""); // State for selected channel
@@ -693,20 +700,25 @@ const CreateProduct = () => {
 
   return (
     <div id="section-1" className="md:w-[80%] w-[100%]  mx-auto">
-      <div className="w-full shadow py-4 flex pe-4 mb-4">
-        <h2 className="px-4 text-xl font-semibold">Add Product</h2>
-      </div>
+      <div className=' flex gap-3 items-center mb-6'>
+          <h1 className=' border border-gray-300 rounded-md p-2 cursor-pointer'>
+            <TfiArrowLeft size={25} />
+          </h1>
+          <h1 className=' text-xl font-semibold  my-2'>
+            Add Product
+          </h1>
+          </div>
 
       <div id="section-1">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         
-          <div className="md:col-span-1  rounded-lg order-6 md:order-3">
+          <div className="md:col-span-1  rounded-lg order-1 md:order-3">
            
 
           
        
-              <div className="bg-[#f3f3f2] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pb-4 px-2">
-                <h1 className=" font-semibold text-lg">Product settings</h1>
+<div className={`pb-4 px-2 ${isDarkMode ? 'bg-[#30334e] text-white' : 'bg-[#f3f3f2] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'}`}>
+          <h1 className=" font-semibold text-lg">Product settings</h1>
 
                 <div>
                 <div className="form-control  ">
@@ -728,7 +740,7 @@ const CreateProduct = () => {
                     onChange={() => setIsChecked(!isChecked)}
                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
                   />
-                  <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-700">
+                  <label htmlFor="exampleCheckbox" className="ml-2 text-sm ">
                   Shipping required
                   </label>
                 </div>
@@ -747,7 +759,7 @@ const CreateProduct = () => {
 
   {/* Modal */}
   {isManageModalOpen && (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-[#30334e] bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white w-96 p-6 rounded-lg shadow-lg">
         {/* Title with count */}
         <div className="flex justify-between items-center mb-4">
@@ -819,17 +831,17 @@ const CreateProduct = () => {
     </ul>
     
   ) : (
-    <p className="text-gray-500 text-sm">No channels selected.</p>
+    <p className=" text-sm">No channels selected.</p>
   )}
    <div className="mt-4">
         {Object.entries(launchTimes).map(([channel, time]) => (
-          <div key={channel} className=" flex items-center  gap-1 text-gray-600 bg-gray-200 p-3 text-sm rounded-lg">
+          <div key={channel} className=" flex items-center  gap-1  bg-gray-200 p-3 text-sm rounded-lg">
           <PiWarningCircleLight color="blue" size={26}  />  <h1>{channel}:</h1> {time || "No launch time set"}
           </div>
         ))}
       </div>
       {isLaunchModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#30334e] bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md w-96">
             <h2 className="text-lg font-semibold mb-4">Set Launch Time (GMT+08:00)</h2>
             <input
@@ -860,7 +872,7 @@ const CreateProduct = () => {
 </div>
 
 <div className="mb-4 mt-8">
-      <label for="SPU" className="block text-sm font-medium text-gray-700">SPU</label>
+      <label for="SPU" className="block text-sm font-medium ">SPU</label>
       <input 
         type="text" 
         id="SPU" 
@@ -870,7 +882,7 @@ const CreateProduct = () => {
       />
     </div>
 <div className="mb-4 mt-8">
-      <label for="Vendor" className="block text-sm font-medium text-gray-700">Vendor</label>
+      <label for="Vendor" className="block text-sm font-medium ">Vendor</label>
       <input 
         type="text" 
         id="Vendor" 
@@ -881,14 +893,14 @@ const CreateProduct = () => {
     </div>
 
   <div className="mb-4 mt-8">
-  <ProductType/>
+  <ProductType isDarkMode={isDarkMode}/>
   </div>
   <div className="mb-4 mt-8">
 
   <div>
       {/* Header */}
       <div className="flex justify-between gap-1 items-center">
-        <h1 className="text-sm font-medium text-gray-700 mb-1">Collections</h1>
+        <h1 className="text-sm font-medium  mb-1">Collections</h1>
         <h1
           className="text-sm font-medium text-blue-700 mb-1 cursor-pointer"
           onClick={openCollectionsModal}
@@ -897,7 +909,7 @@ const CreateProduct = () => {
         </h1>
       </div>
 
-      <p className=" text-gray-500 text-sm">If you've turned on Smart Collections, we'll automatically match it with items that fit.</p>
+      <p className="  text-sm">If you've turned on Smart Collections, we'll automatically match it with items that fit.</p>
 
       {/* Modal */}
       {isCollectionsModalOpen && (
@@ -905,7 +917,7 @@ const CreateProduct = () => {
           <div className="bg-white rounded-lg w-full md:w-1/2 mx-5  p-6 shadow-lg">
             <h1 className=" font-semibold text-lg my-3">Select product collections</h1>
             <h1 className=" mb-4">Applied categorization</h1>
-            <p className=" text-gray-500 text-sm my-3">If you've turned on Smart Collections, we'll automatically match it with items that fit.</p>
+            <p className="  text-sm my-3">If you've turned on Smart Collections, we'll automatically match it with items that fit.</p>
            
             <input
               type="text"
@@ -915,7 +927,7 @@ const CreateProduct = () => {
             <div className="flex justify-end gap-2 mt-6">
               <button
                 onClick={closeCollectionsModal}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                className="px-4 py-2 bg-gray-200  rounded hover:bg-gray-300"
               >
                 Cancel
               </button>
@@ -940,8 +952,11 @@ const CreateProduct = () => {
 
               </div>
 
-              <div className=" my-8 rounded-lg bg-[#f3f3f2] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pt-2 pb-4 px-2">
-                <h1>Theme template</h1>
+              <div
+  className={`my-8 rounded-lg shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pt-2 pb-4 px-2 ${
+    isDarkMode ? "bg-[#30334e]" : "bg-[#f3f3f2]"
+  }`}
+>                <h1>Theme template</h1>
                     <div className="w-full max-w-xs">
                   <select id="product-type" name="product-type" className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option value="Default">Default</option>
@@ -949,7 +964,7 @@ const CreateProduct = () => {
                   
                   </select>
                 </div>
-                <p className=" text-sm my-2 text-gray-500">Choose how you'd like the card to look like</p>
+                <p className=" text-sm my-2 ">Choose how you'd like the card to look like</p>
               </div>
 
 
@@ -964,7 +979,7 @@ const CreateProduct = () => {
             onSubmit={handleSave}
             className="md:col-span-3 order-2 md:order-1"
           >
-            <div className=" bg-white p-5 rounded-lg">
+          <div className={`p-5 rounded-lg ${isDarkMode ? 'bg-[#30334e] text-white' : 'bg-white'}`}>
 
                 <div>
                     <h1 className=" text-lg my-6 font-semibold ">Product information</h1>
@@ -972,7 +987,7 @@ const CreateProduct = () => {
             <div className="mb-4">
               <label
                 htmlFor="Product_name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 Product Name
               </label>
@@ -993,7 +1008,7 @@ const CreateProduct = () => {
             <div className="mb-4">
               <label
                 htmlFor="Product_name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 Summery
               </label>
@@ -1015,7 +1030,7 @@ const CreateProduct = () => {
             <div className="mb-4">
               <label
                 htmlFor="short_desc"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 Short Description
               </label>
@@ -1027,7 +1042,8 @@ const CreateProduct = () => {
                 className="mt-1 w-full rounded-lg h-36 p-2  border"
               /> */}
 
-              <RichTextEditor/>
+              <TextEditor isDarkMode={isDarkMode}/>
+              {/* <RichTextEditor/> */}
 
 
             </div>
@@ -1035,15 +1051,10 @@ const CreateProduct = () => {
     
 {/* Image Div */}
 
-            <div className="mb-4 bg-white p-5 my-10 rounded-lg " id="">
+            <div  className={`mb-4 p-5 my-10 rounded-lg ${isDarkMode ? 'bg-[#30334e] text-white' : 'bg-white'}`} id="">
               <div className=" flex justify-between my-3">
               
-              <h1
-      
-        className=" font-semibold"
-      >
-        Image/Video
-      </h1>
+              <h1 className=" font-semibold" > Image/Video </h1>
 
    
                 <div className="  flex gap-4">
@@ -1157,7 +1168,9 @@ const CreateProduct = () => {
               </div>
 
               <div
-  className={`relative bg-[#f7f7f9]   border-dashed border-2 rounded-lg p-4 ${
+  className={`relative   border-dashed border-2 rounded-lg p-4 ${
+    isDarkMode ? "bg-[#30334e]" : "bg-[#f7f7f9] "
+  } ${
     isDragging ? "border-blue-500 bg-blue-100" : "border-gray-300 hover:border-blue-500 hover:text-blue-500"
   }`}
   onDragOver={(e) => {
@@ -1196,13 +1209,13 @@ const CreateProduct = () => {
             </button>
           </div>
         ))}
-        <label htmlFor="fileInput" className="flex gap-2 border border-gray-300 p-2 rounded-md items-center cursor-pointer text-center">
+        <label htmlFor="fileInput" className="flex gap-2 border border-gray-300 p-2  rounded-md items-center cursor-pointer text-center">
           Add Image <FaPlusCircle />
         </label>
       </div>
     ) : (
       <label htmlFor="fileInput" className="cursor-pointer">
-       <div className=" flex items-center flex-col gap-3">
+       <div className=" text-blue-600 flex items-center flex-col gap-3">
        <BsPlusLg size={30} />
        <h1>Add Image (or Drag and Drop)</h1>
        </div>
@@ -1224,7 +1237,7 @@ const CreateProduct = () => {
     </div>
   )}
 </div>
-<p className=" text-gray-500 text-sm mt-4 mb-8">Supports files in .jpg, .png, .webp, .gif, and .mp4 formats. Files smaller than 4MB work better, and .gif files shouldn't be larger than 8MB. Maximum file size 10MB.</p>
+<p className="  text-sm mt-4 mb-8">Supports files in .jpg, .png, .webp, .gif, and .mp4 formats. Files smaller than 4MB work better, and .gif files shouldn't be larger than 8MB. Maximum file size 10MB.</p>
 
 
 
@@ -1312,7 +1325,11 @@ const CreateProduct = () => {
                   </div>
                 </div>
               )} */}
-              <div className="mb-3 py-2 pb-3 shadow bg-white flex-shrink-0">
+             <div
+  className={`mb-3 py-2 pb-3 shadow flex-shrink-0 ${
+    isDarkMode ? "bg-[#30334e]" : "bg-white"
+  }`}
+>
                 <div className="flex justify-between mb-2">
                   <div className=" font-semibold mx-4 text-lg mt-7 mb-4">Price settings</div>
                   <div className="mx-4 my-2 flex items-center">
@@ -1338,7 +1355,7 @@ const CreateProduct = () => {
       <div className="grid grid-cols-2 gap-6 mb-6">
         {/* Retail Price */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium  mb-2">
             Retail Price
           </label>
           <input
@@ -1351,7 +1368,7 @@ const CreateProduct = () => {
 
         {/* Item Cost */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium  mb-2">
             Item Cost
           </label>
           <input
@@ -1367,28 +1384,28 @@ const CreateProduct = () => {
 
         {/* Profit */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium  mb-2">
             Profit
           </label>
           <input
             type="text"
             value={profit.toFixed(2)}
             readOnly
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
-          />
+            className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isDarkMode ? 'bg-black' : 'bg-gray-100'} cursor-not-allowed`}
+            />
         </div>
 
         {/* Margin */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium  mb-2">
             Margin (%)
           </label>
           <input
             type="text"
             value={margin}
             readOnly
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
-          />
+            className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isDarkMode ? 'bg-black' : 'bg-gray-100'} cursor-not-allowed`}
+            />
         </div>
       
       </div>
@@ -1403,7 +1420,7 @@ const CreateProduct = () => {
   
    <div className="grid grid-cols-2 gap-6 mb-6">
    <div className="mb-4">
-      <label for="sku" className="block text-sm font-medium text-gray-700">SKU</label>
+      <label for="sku" className="block text-sm font-medium ">SKU</label>
       <input 
         type="text" 
         id="sku" 
@@ -1415,7 +1432,7 @@ const CreateProduct = () => {
 
 
     <div className="mb-4">
-      <label for="barcode" className="block text-sm font-medium text-gray-700">Barcode</label>
+      <label for="barcode" className="block text-sm font-medium ">Barcode</label>
       <input 
         type="text" 
         id="barcode" 
@@ -1427,7 +1444,7 @@ const CreateProduct = () => {
    </div>
 
     <div className="mb-4">
-      <label for="quantity" className="block text-sm font-medium text-gray-700">Inventory Quantity</label>
+      <label for="quantity" className="block text-sm font-medium ">Inventory Quantity</label>
       <input 
         type="number" 
         id="quantity" 
@@ -1441,11 +1458,11 @@ const CreateProduct = () => {
                   <input
                     type="checkbox"
                     id="exampleCheckbox"
-                    checked={isChecked}
-                    onChange={() => setIsChecked(!isChecked)}
+                    checked={isTrackChecked}
+                    onChange={() => setTrackIsChecked(!isTrackChecked)}
                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
                   />
-                  <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-700">
+                  <label htmlFor="exampleCheckbox" className="ml-2 text-sm ">
                   Track quantity with orders
                   </label>
                 </div>
@@ -1460,14 +1477,17 @@ const CreateProduct = () => {
               </div>
 
               {hasVariations && (
-                <div className="mb-4 py-4 bg-white shadow">
+                <div
+                className={`mb-4 py-4 ${isDarkMode ? 'bg-[#282a42]' : 'bg-white'} shadow`}
+              >
+              
                   <div className="mx-5">
                     {variations.map((variation, index) => (
                       <div key={index} className="">
                         <div className="mb-6">
                           <div className="flex gap-4">
                             <div className="flex-1">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-sm font-medium  mb-2">
                                 Select Variation
                               </label>
                               <Select
@@ -1483,7 +1503,7 @@ const CreateProduct = () => {
                             </div>
 
                             <div className="flex-1">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className="block text-sm font-medium  mb-2">
                                 Select Values
                               </label>
                               <Select
@@ -1517,34 +1537,34 @@ const CreateProduct = () => {
                       <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                           <tr className="text-center">
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Variation & Value
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Costing Price
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               selling Price
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Stock
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Image
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Discount
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Discount Type
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Discount Date
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Code
                             </th>
-                            <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-2 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                               Remove
                             </th>
                           </tr>

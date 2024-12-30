@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaPlus, FaPlusCircle, FaTrash } from "react-icons/fa";
 
-const ProductType = () => {
+const ProductType = ({isDarkMode}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("Select Product Type");
   const [showCustomInput, setShowCustomInput] = useState(false);
@@ -38,7 +38,7 @@ const ProductType = () => {
   return (
     <div className="relative inline-block w-full text-left">
       <div className="flex justify-between gap-1">
-        <h1 className="text-sm font-medium text-gray-700 mb-1">Product Type</h1>
+        <h1 className="text-sm font-medium  mb-1">Product Type</h1>
         <h1
           onClick={handleCustomClick}
           className="text-sm flex items-center gap-2 font-medium text-blue-700 mb-1 cursor-pointer"
@@ -50,7 +50,7 @@ const ProductType = () => {
       {/* Dropdown Button */}
       <button
         onClick={toggleDropdown}
-        className="inline-flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="inline-flex justify-between w-full px-4 py-2 text-sm font-medium   border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         {selectedType}
         <svg
@@ -93,7 +93,7 @@ const ProductType = () => {
         {showCustomInput ? (
           <div>
           <div className="flex justify-between my-3 items-center gap-2">
-          <h1 className="text-sm font-medium text-gray-700 mb-1">Custom Product Type</h1>
+          <h1 className="text-sm font-medium  mb-1">Custom Product Type</h1>
 
             <button
               onClick={handleDeleteCustom}

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { CiExport } from 'react-icons/ci'
 import { MdOutlineArrowDropDown } from 'react-icons/md'
 import { FaFileExcel, FaPrint, FaFilePdf, FaPlus, FaTrash, FaEye } from 'react-icons/fa';
-const Permission = () => {
+const Permission = ({isDarkMode}) => {
 
      const [isOpen, setIsOpen] = useState(false);
       
@@ -13,7 +13,8 @@ const Permission = () => {
 
   return (
     <div>
-          <div className=' flex flex-col md:flex-row gap-4 bg-white py-3 px-2 justify-between'>
+          <div   className={`flex flex-col md:flex-row gap-4 ${isDarkMode ? 'bg-bg-[#30334e]' : 'bg-white'} py-3 px-2 justify-between`}
+          >
         
         
                 <div className='flex items-center gap-2'>
@@ -59,22 +60,29 @@ const Permission = () => {
     <table className="min-w-full rounded-lg">
       <thead>
         <tr>
-          <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Name</th>
-          <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Assigned To</th>
-          <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Created Date</th>
-          <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Actions</th>
+          <th className={`py-2 px-4 text-left text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-600'}`}
+>Name</th>
+          <th className={`py-2 px-4 text-left text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-600'}`}
+>Assigned To</th>
+          <th className={`py-2 px-4 text-left text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-600'}`}
+>Created Date</th>
+          <th className={`py-2 px-4 text-left text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-600'}`}
+>Actions</th>
         </tr>
       </thead>
 
-      <tbody className="bg-white">
+      <tbody className={isDarkMode ? "bg-[#30334e]" : "bg-white"}
+      >
         <tr className="border-b">
-          <td className="py-3 px-4 font-semibold text-sm text-gray-800">Management</td>
+          <td className={`py-3 px-4 font-semibold text-sm ${isDarkMode ? 'text-white' : 'text-gray-500'}`}
+>Management</td>
           <td className="py-3 px-4 text-sm">
             <button className="bg-blue-100 font-semibold text-blue-600 px-3 py-1 rounded-lg">
               Administrator
             </button>
           </td>
-          <td className="py-3 px-4 text-sm text-gray-800">14 Apr 2021, 8:43 PM</td>
+          <td className={`py-3 px-4 text-sm ${isDarkMode ? 'text-white' : 'text-gray-500'}`}
+>14 Apr 2021, 8:43 PM</td>
           <td className="py-3 px-4 flex space-x-2">
             <button className="text-red-500 hover:text-red-800">
               <FaTrash />
@@ -85,7 +93,8 @@ const Permission = () => {
           </td>
         </tr>
         <tr className="border-b">
-          <td className="py-3 px-4 font-semibold text-sm text-gray-800">Add & Remove Users</td>
+          <td className={`py-3 px-4 font-semibold text-sm ${isDarkMode ? 'text-white' : 'text-gray-500'}`}
+>Add & Remove Users</td>
           <td className="py-3 px-4 flex  gap-3 text-sm">
             <button className="bg-blue-100 font-semibold text-blue-600 px-3 py-1 rounded-lg">
               Administrator
@@ -94,7 +103,8 @@ const Permission = () => {
               Manager
             </button>
           </td>
-          <td className="py-3 px-4 text-sm text-gray-800">14 Apr 2021, 8:43 PM</td>
+          <td className={`py-3 px-4 text-sm ${isDarkMode ? 'text-white' : 'text-gray-500'}`}
+>14 Apr 2021, 8:43 PM</td>
           <td className="py-3 px-4 flex space-x-2">
             <button className="text-red-500 hover:text-red-800">
               <FaTrash />

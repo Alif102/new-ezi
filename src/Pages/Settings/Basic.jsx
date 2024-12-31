@@ -2,7 +2,10 @@ import { div } from 'framer-motion/client';
 import React, { useState } from 'react'
 import { PiWarningCircleLight } from 'react-icons/pi';
 
-const Basic = () => {
+const Basic = ({isDarkMode}) => {
+
+  
+  console.log(isDarkMode)
     const [selectedImage, setSelectedImage] = useState(null);
     const [isChecked, setIsChecked] = useState(false);
     const [isCheckedMarketing, setIsCheckedMarketing] = useState(false);
@@ -71,18 +74,19 @@ const Basic = () => {
             <div className=' flex  justify-evenly flex-col md:flex-row'>
 
                 <div className='flex-1'>
-                    <h1 className=' text-gray-600 my-3 text-3xl font-semibold' >Basic store information</h1>
-                    <p className=' text-gray-500 '>This information allows EZICALC and your customers to contact you.</p>
+                    <h1 className={`text-3xl font-semibold my-3 ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`} >Basic store information</h1>
+                    <p className={`text-gray-500 ${isDarkMode ? 'text-gray-100' : 'text-gray-500'}`}>This information allows EZICALC and your customers to contact you.</p>
                 </div>
 
-                <div className=' bg-white flex-1 p-4 rounded-lg'>
-                    <h1 className=' text-gray-600 font-semibold'>Store logo</h1>
+                <div className={`flex-1 p-4 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-white '}`}>
+
+                    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store logo</h1>
                     <p className=' text-gray-500'>This logo is displayed on the store management page after you log into EZICALC. <span className=' text-blue-500'>Preview display here</span>. Max image size is 10MB.</p>
 
                     <div className="flex flex-col  my-3">
                         <label
                             htmlFor="file-input"
-                            className="flex items-center justify-center w-32 h-32 border-2 border-dashed bg-gray-100 border-gray-300 rounded-lg cursor-pointer hover:border-gray-500 transition"
+                            className={`flex items-center justify-center w-32 h-32 border-2 border-dashed ${isDarkMode ? 'bg-[#30334e]' : 'bg-gray-200 '} border-gray-300 rounded-lg cursor-pointer hover:border-gray-500 transition`}
                         >
                             {selectedImage ? (
                                 <img
@@ -102,7 +106,7 @@ const Basic = () => {
                             onChange={handleImageChange}
                         />
                     </div>
-                    <h1 className=' text-gray-600 font-semibold'>Store Name</h1>
+                    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store Name</h1>
                     <div className="">
                         <input
                             type="text"
@@ -110,7 +114,7 @@ const Basic = () => {
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
                         />
                     </div>
-                    <h1 className=' text-gray-600 mt-5 font-semibold'>Store admin contact email</h1>
+                    <h1  className={`mt-5 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store admin contact email</h1>
 
 
                     <div className=" mt-3 ">
@@ -137,17 +141,18 @@ const Basic = () => {
             <div className=' flex my-10  justify-evenly flex-col md:flex-row'>
 
                 <div className='flex-1'>
-                    <h1 className=' text-gray-600 my-3 text-3xl font-semibold' >Business details</h1>
-                    <p className=' text-gray-500 '>Manage store billing information, product categories, and the business location's time zone.</p>
+                    <h1 className={`text-3xl font-semibold my-3 ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`} >Business details</h1>
+                    <p className={`text-gray-500 ${isDarkMode ? 'text-gray-100' : 'text-gray-500'}`}>Manage store billing information, product categories, and the business location's time zone.</p>
                 </div>
 
-                <div className=' bg-white flex-1 p-4 rounded-lg'>
-                    <h1 className=' text-gray-600 font-semibold'>Store logo</h1>
+                <div className={`flex-1 p-4 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}>
+
+                    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store logo</h1>
                     <p className=' text-gray-500 text-xs'>This is the company or owner's home address. Your billing address affects tax fees, so please review it carefully for any changes. It may also impact credit card links or auto payments. We'll update the credit card linkage, but if you receive an error notification, please retry manually to prevent payment failures and ensure continued product access.
                    <span className=' text-blue-500'> Learn more</span></p>
 
                    
-                    <h1 className=' text-gray-600 font-semibold'>Store Name</h1>
+                    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store Name</h1>
                     <div className="">
                         <input
                             type="text"
@@ -155,7 +160,7 @@ const Basic = () => {
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
                         />
                     </div>
-                    <h1 className=' text-gray-600 mt-5 font-semibold'>Store admin contact email</h1>
+                    <h1  className={`mt-5 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store admin contact email</h1>
 
 
                     <div className=" mt-3 ">
@@ -173,12 +178,12 @@ const Basic = () => {
         <input
           type="text"
           value={inputText}
-          className="p-2 border w-auto border-gray-300 rounded"
-          disabled
+          className={`p-2 border w-auto border-gray-300 rounded${isDarkMode ? 'bg-[#30334e]' : 'bg-white '} `}
+          // disabled
         />
         <button
           onClick={() => setIsModalOpen(true)}
-          className=" border border-gray-300 bg-gray-100 px-4 py-2 rounded"
+          className={`border border-gray-300 ${isDarkMode ? 'bg-[#30334e]' : 'bg-gray-100 '} px-4 py-2 rounded`}
         >
           Edit
         </button>
@@ -187,11 +192,11 @@ const Basic = () => {
   
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+          <div className={`${isDarkMode ? 'bg-[#30334e]' : 'bg-white '} p-6 rounded-lg w-96 shadow-lg`}>
             <h2 className="text-2xl mt-3 mb-4">Edit</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Country/Region</label>
+                <label className="block text-sm font-medium text-gray-500">Country/Region</label>
                 <select
                   name="country"
                   value={formData.country}
@@ -206,7 +211,7 @@ const Basic = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Address</label>
+                <label className="block text-sm font-medium text-gray-500">Address</label>
                 <input
                   type="text"
                   name="address"
@@ -217,7 +222,7 @@ const Basic = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Apartment, suite, etc.</label>
+                <label className="block text-sm font-medium text-gray-500">Apartment, suite, etc.</label>
                 <input
                   type="text"
                   name="apartment"
@@ -228,7 +233,7 @@ const Basic = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">City</label>
+                <label className="block text-sm font-medium text-gray-500">City</label>
                 <input
                   type="text"
                   name="city"
@@ -239,7 +244,7 @@ const Basic = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">ZIP Code</label>
+                <label className="block text-sm font-medium text-gray-500">ZIP Code</label>
                 <input
                   type="text"
                   name="zip"
@@ -255,7 +260,7 @@ const Basic = () => {
             <div className="mt-4 flex justify-end space-x-2">
               <button
                 onClick={handleCancel}
-                className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
+                className="px-4 py-2 bg-gray-300 text-gray-500 rounded"
               >
                 Cancel
               </button>
@@ -273,7 +278,7 @@ const Basic = () => {
 
 
     <div className="w-full max-w-xs">
-  <label for="product-type" className="block text-sm font-medium text-gray-700">Product Type</label>
+  <label for="product-type" className="block text-sm font-medium text-gray-500">Product Type</label>
   <select id="product-type" name="product-type" className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
     <option value="">Select a product type</option>
     <option value="electronics">Electronics</option>
@@ -285,7 +290,7 @@ const Basic = () => {
 </div>
 
 <div class="w-full my-11 max-w-xs">
-  <label for="time-zone" className="block text-sm font-medium text-gray-700">Business Location Time Zone</label>
+  <label for="time-zone" className="block text-sm font-medium text-gray-500">Business Location Time Zone</label>
   <select id="time-zone" name="time-zone" className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
     <option value="">Select a Time Zone</option>
     <option value="pst">Pacific Standard Time (PST)</option>
@@ -315,12 +320,13 @@ const Basic = () => {
             <div className=' flex  justify-evenly flex-col md:flex-row'>
 
                 <div className='flex-1'>
-                    <h1 className=' text-gray-600 my-3 text-3xl font-semibold' >Order settings</h1>
-                    <p className=' text-gray-500 '>Set order ID prefix</p>
+                    <h1 className={`text-3xl font-semibold my-3 ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`} >Order settings</h1>
+                    <p className={`text-gray-500 ${isDarkMode ? 'text-gray-100' : 'text-gray-500'}`}>Set order ID prefix</p>
                 </div>
 
-                <div className=' bg-white flex-1 p-4 rounded-lg'>
-                    <h1 className=' text-gray-600 font-semibold'>Order ID prefix</h1>
+                <div className={`flex-1 p-4 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}>
+
+                    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Order ID prefix</h1>
                     <p className=' text-gray-500'>Order ID starts from 1001 by default. You may add a prefix to create custom IDs. e.g. "EN1001"
 </p>
 
@@ -350,12 +356,13 @@ const Basic = () => {
             <div className=' flex my-7  justify-evenly flex-col md:flex-row'>
 
                 <div className='flex-1'>
-                    <h1 className=' text-gray-600 my-3 text-3xl font-semibold' >Store status</h1>
-                    <p className=' text-gray-500 '>Your store can either be ‘Open’ or ‘Closed’. You may want to temporarily close the store for updates or stocktake. Products won’t be available for sale when the store is ‘Closed’.</p>
+                    <h1 className={`text-3xl font-semibold my-3 ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`} >Store status</h1>
+                    <p className={`text-gray-500 ${isDarkMode ? 'text-gray-100' : 'text-gray-500'}`}>Your store can either be ‘Open’ or ‘Closed’. You may want to temporarily close the store for updates or stocktake. Products won’t be available for sale when the store is ‘Closed’.</p>
                 </div>
 
-                <div className=' bg-white flex-1 p-4 rounded-lg'>
-                    <h1 className=' text-gray-600 font-semibold'>Store status</h1>
+                <div className={`flex-1 p-4 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}>
+
+                    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Store status</h1>
 
                     <div className="w-full max-w-xs">
   <select id="product-type" name="product-type" className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -383,12 +390,13 @@ const Basic = () => {
             <div className=' flex mb-7  justify-evenly flex-col md:flex-row'>
 
 <div className='flex-1'>
-    <h1 className=' text-gray-600 my-3 text-3xl font-semibold' >Payment currency</h1>
-    <p className=' text-gray-500 '>Choose the currency your store will accept payments in. Note that this cannot be modified once the first order has been made.</p>
+    <h1 className={`text-3xl font-semibold my-3 ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`} >Payment currency</h1>
+    <p className={`text-gray-500 ${isDarkMode ? 'text-gray-100' : 'text-gray-500'}`}>Choose the currency your store will accept payments in. Note that this cannot be modified once the first order has been made.</p>
 </div>
 
-<div className=' bg-white flex-1 p-4 rounded-lg'>
-    <h1 className=' text-gray-600 font-semibold'>Payment currency</h1>
+<div className={`flex-1 p-4 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}>
+
+    <h1 className={`text-gray-600 font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-600'}`}>Payment currency</h1>
 
     <p>Australian Dollar (AUD)</p>
 
@@ -397,7 +405,7 @@ const Basic = () => {
       {/* Change Currency Button */}
       <button
         onClick={handleOpenModal}
-        className="px-4 py-3 my-3 bg-gray-100  border border-gray-400 rounded-lg"
+        className={`px-4 py-3 my-3 ${isDarkMode ? 'bg-[#30334e]' : 'bg-white '}  border border-gray-400 rounded-lg`}
       >
         Change Currency
       </button>
@@ -436,11 +444,11 @@ const Basic = () => {
       {/* Second Modal: Final Confirmation */}
       {isFinalModalOpen && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg w-96 ">
-            <h3 className="text-lg font-semibold">Are you sure you want to change the currency?</h3>
+<div className={`p-6 rounded-lg w-96 ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}>
+<h3 className="text-lg font-semibold">Are you sure you want to change the currency?</h3>
 
             <div className="w-full max-w-xs">
-  <label for="currency-type" className="block text-sm font-medium text-gray-700">Select the currency you wish to change to:</label>
+  <label for="currency-type" className="block text-sm font-medium text-gray-500">Select the currency you wish to change to:</label>
   <select id="currency-type" name="currency-type" className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
     <option value="">Select a type</option>
     <option value="USD">USD Doller</option>
@@ -463,7 +471,7 @@ const Basic = () => {
                 onChange={() => setIsChecked(!isChecked)}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
               />
-              <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-700">
+              <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-500">
               Close store at the same time
               </label>
             </div>
@@ -480,7 +488,7 @@ const Basic = () => {
                 onChange={() => setIsCheckedMarketing(!isCheckedMarketing)}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
               />
-              <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-700">
+              <label htmlFor="exampleCheckbox" className="ml-2 text-sm text-gray-500">
               Disable marketing activities at the same time
               </label>
             </div>

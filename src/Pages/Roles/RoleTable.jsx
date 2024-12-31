@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import {  FaTrash, FaEye } from "react-icons/fa";
+import { FaTrash, FaEye } from "react-icons/fa";
 import { GrHostMaintenance } from "react-icons/gr";
 import { MdArrowBackIos, MdArrowForwardIos, MdOutlineSubscriptions } from "react-icons/md";
 import { TbChessKing } from "react-icons/tb";
 
-const RoleTable = () => {
+const RoleTable = ({ isDarkMode }) => {
   const [rows, setRows] = useState([
     {
       id: 1,
@@ -14,7 +14,7 @@ const RoleTable = () => {
       plan: "Team",
       status: "Inactive",
       selected: false,
-      icon: <GrHostMaintenance />
+      icon: <GrHostMaintenance />,
     },
     {
       id: 2,
@@ -23,7 +23,8 @@ const RoleTable = () => {
       role: "Subscriber",
       plan: "Basic",
       status: "Active",
-      selected: false,  icon: <MdOutlineSubscriptions />
+      selected: false,
+      icon: <MdOutlineSubscriptions />,
     },
     {
       id: 3,
@@ -32,20 +33,19 @@ const RoleTable = () => {
       role: "Author",
       plan: "Company",
       status: "Pending",
-      selected: false, icon: <TbChessKing />
+      selected: false,
+      icon: <TbChessKing />,
     },
   ]);
 
   const [selectAll, setSelectAll] = useState(false);
 
-  // Handle selecting/deselecting all rows
   const handleSelectAll = () => {
     const updatedSelectAll = !selectAll;
     setSelectAll(updatedSelectAll);
     setRows(rows.map((row) => ({ ...row, selected: updatedSelectAll })));
   };
 
-  // Handle selecting/deselecting individual rows
   const handleRowSelect = (id) => {
     setRows(
       rows.map((row) => (row.id === id ? { ...row, selected: !row.selected } : row))
@@ -53,25 +53,25 @@ const RoleTable = () => {
   };
 
   return (
-    <div className=" mx-auto ">
+    <div className={`mx-auto ${isDarkMode ? "bg-[#282a42] text-white" : "bg-white text-gray-800"}`}>
       <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-300 bg-white rounded-lg ">
+        <table className={`min-w-full border ${isDarkMode ? "border-gray-700" : "border-gray-300"} rounded-lg`}>
           <thead>
-            <tr className="bg-gray-100">
-              <th className="py-5 px-4 text-left text-sm font-semibold text-gray-600">
+            <tr className={`${isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-600"}`}>
+              <th className="py-5 px-4 text-left text-sm font-semibold">
                 <input
                   type="checkbox"
                   checked={selectAll}
                   onChange={handleSelectAll}
-                  className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-400"
+                  className={`w-4 h-4 ${isDarkMode ? "bg-gray-800 border-gray-600" : "text-blue-500 border-gray-300"} rounded focus:ring-blue-400`}
                 />
               </th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">User</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Email</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Role</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Plan</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Status</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Actions</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">User</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Email</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Role</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Plan</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Status</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -79,15 +79,17 @@ const RoleTable = () => {
               <tr
                 key={row.id}
                 className={`${
-                  row.selected ? "bg-blue-50" : ""
-                } border-b border-gray-300 hover:bg-gray-100`}
+                  row.selected ? "bg-blue-50 dark:bg-blue-900" : ""
+                } ${isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"} border-b ${
+                  isDarkMode ? "border-gray-700" : "border-gray-300"
+                }`}
               >
                 <td className="py-3 px-4">
                   <input
                     type="checkbox"
                     checked={row.selected}
                     onChange={() => handleRowSelect(row.id)}
-                    className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-400"
+                    className={`w-4 h-4 ${isDarkMode ? "bg-gray-800 border-gray-600" : "text-blue-500 border-gray-300"} rounded focus:ring-blue-400`}
                   />
                 </td>
                 <td className="py-3  pr-12 flex items-center space-x-4">
@@ -97,29 +99,26 @@ const RoleTable = () => {
                     className="w-10 h-10 rounded-full border border-gray-300"
                   />
                   <div>
-                    <p className="text-sm font-medium text-gray-800">{row.user.name}</p>
+                    <p className="text-sm font-medium">{row.user.name}</p>
                     <p className="text-sm text-gray-500">{row.user.phone}</p>
                   </div>
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-800">{row.email}</td>
-                <td className="py-3  px-4 text-sm  text-gray-800 ">
-               <h1 className=" flex gap-3 items-center"> {row.icon} {row.role}</h1>
+                <td className="py-3 px-4 text-sm">{row.email}</td>
+                <td className="py-3 px-4 text-sm flex gap-3 items-center">{row.icon} {row.role}</td>
+                <td className="py-3 px-4 text-sm">{row.plan}</td>
+                <td>
+                  <button
+                    className={`py-1 px-4 text-sm font-medium rounded-xl text-center ${
+                      row.status === "Active"
+                        ? "bg-green-200 text-green-600"
+                        : row.status === "Pending"
+                        ? "bg-gray-200 text-gray-600"
+                        : "bg-red-100 text-red-600"
+                    }`}
+                  >
+                    {row.status}
+                  </button>
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-800">{row.plan}</td>
-                <td
- 
->
- <button  className={`py-1 px-4 text-sm font-medium rounded-xl text-center  ${
-    row.status === "Active"
-      ? "bg-green-200 text-green-600"
-      : row.status === "Pending"
-      ? "bg-gray-200 text-gray-600"
-      : "bg-red-100 text-red-600"
-  }`}>
- {row.status}
- </button>
-</td>
-
                 <td className="py-3 px-4 flex space-x-2">
                   <button className="text-red-500 hover:text-red-800">
                     <FaTrash />
@@ -127,31 +126,34 @@ const RoleTable = () => {
                   <button className="text-blue-600 hover:text-blue-800">
                     <FaEye />
                   </button>
-                  {/* <button className="text-gray-600 hover:text-gray-800">
-                    <FaEllipsisV />
-                  </button> */}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-<div className=" flex justify-end my-4 gap-2">
-  
-<div className="flex items-center justify-center">
-      <MdArrowForwardIos className="bg-gray-200  p-2 rounded-lg" size={28} />
-    </div>
-
-    <div className="flex items-center justify-center">
-  <h1 className="bg-blue-600 text-white p-2 rounded-full h-10 w-10 flex items-center justify-center">1</h1>
-</div>
-
-<div className="flex items-center justify-center">
-      <MdArrowBackIos className="bg-gray-200  p-2 rounded-lg" size={28} />
-    </div>
-</div>
-
-
-        
+        <div className="flex justify-end my-4 gap-2">
+          <div className="flex items-center justify-center">
+            <MdArrowForwardIos
+              className={`${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-200"} p-2 rounded-lg`}
+              size={28}
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <h1
+              className={`p-2 rounded-full h-10 w-10 flex items-center justify-center ${
+                isDarkMode ? "bg-blue-700 text-white" : "bg-blue-600 text-white"
+              }`}
+            >
+              1
+            </h1>
+          </div>
+          <div className="flex items-center justify-center">
+            <MdArrowBackIos
+              className={`${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-200"} p-2 rounded-lg`}
+              size={28}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { FaTrash, FaEye } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 
-const Table = () => {
+const Table = ({ isDarkMode }) => {
   const [rows, setRows] = useState([
     {
       id: 1,
@@ -49,25 +49,25 @@ const Table = () => {
   };
 
   return (
-    <div className="mx-auto">
+    <div className={`mx-auto ${isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"}`}>
       <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-300 bg-white rounded-lg">
+        <table className={`min-w-full border ${isDarkMode ? "border-gray-700 bg-gray-900" : "border-gray-300 bg-white"} rounded-lg`}>
           <thead>
-            <tr className="bg-gray-100">
-              <th className="py-5 px-4 text-left text-sm font-semibold text-gray-600">
+            <tr className={isDarkMode ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-600"}>
+              <th className="py-5 px-4 text-left text-sm font-semibold">
                 <input
                   type="checkbox"
                   checked={selectAll}
                   onChange={handleSelectAll}
-                  className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-400"
+                  className={`w-4 h-4 ${isDarkMode ? "text-blue-300 border-gray-600" : "text-blue-500 border-gray-300"} rounded focus:ring-blue-400`}
                 />
               </th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">User</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Email</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Role</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Plan</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Status</th>
-              <th className="py-2 px-4 text-left text-sm font-semibold text-gray-600">Actions</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">User</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Email</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Role</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Plan</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Status</th>
+              <th className="py-2 px-4 text-left text-sm font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -75,15 +75,15 @@ const Table = () => {
               <tr
                 key={row.id}
                 className={`${
-                  row.selected ? "bg-blue-50" : ""
-                } border-b border-gray-300 hover:bg-gray-100`}
+                  row.selected ? (isDarkMode ? "bg-gray-800" : "bg-blue-50") : ""
+                } border-b ${isDarkMode ? "border-gray-700" : "border-gray-300"} hover:${isDarkMode ? "bg-gray-700" : "bg-gray-100"}`}
               >
                 <td className="py-3 px-4">
                   <input
                     type="checkbox"
                     checked={row.selected}
                     onChange={() => handleRowSelect(row.id)}
-                    className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-400"
+                    className={`w-4 h-4 ${isDarkMode ? "text-blue-300 border-gray-600" : "text-blue-500 border-gray-300"} rounded focus:ring-blue-400`}
                   />
                 </td>
                 <td className="py-3 px-4 flex items-center space-x-4">
@@ -93,18 +93,16 @@ const Table = () => {
                     className="w-10 h-10 rounded-full border border-gray-300"
                   />
                   <div>
-                    <p className="text-sm font-medium text-gray-800">{row.user.name}</p>
-                    <p className="text-sm text-gray-500">{row.user.phone}</p>
+                    <p className="text-sm font-medium">{row.user.name}</p>
+                    <p className="text-sm">{row.user.phone}</p>
                   </div>
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-800">{row.email}</td>
-                <td className="py-3 px-4 text-sm text-gray-800">
-                  <div className="flex items-center">
-                    <FiEdit className="mr-2 text-blue-500" />
-                    <span>{row.role}</span>
-                  </div>
+                <td className="py-3 px-4 text-sm">{row.email}</td>
+                <td className="py-3 px-4 text-sm flex items-center">
+                  <FiEdit className={`mr-2 ${isDarkMode ? "text-blue-300" : "text-blue-500"}`} />
+                  <span>{row.role}</span>
                 </td>
-                <td className="py-3 px-4 text-sm text-gray-800">{row.plan}</td>
+                <td className="py-3 px-4 text-sm">{row.plan}</td>
                 <td>
                   <button
                     className={`py-1 px-4 text-sm font-medium rounded-xl text-center ${
@@ -119,10 +117,10 @@ const Table = () => {
                   </button>
                 </td>
                 <td className="py-3 px-4 flex space-x-2">
-                  <button className="text-red-500 hover:text-red-800">
+                  <button className={`${isDarkMode ? "text-red-400" : "text-red-500"} hover:text-red-800`}>
                     <FaTrash />
                   </button>
-                  <button className="text-blue-600 hover:text-blue-800">
+                  <button className={`${isDarkMode ? "text-blue-300" : "text-blue-600"} hover:text-blue-800`}>
                     <FaEye />
                   </button>
                 </td>
@@ -134,13 +132,13 @@ const Table = () => {
         {/* Pagination */}
         <div className="flex justify-end my-4 gap-2">
           <div className="flex items-center justify-center">
-            <MdArrowForwardIos className="bg-gray-200 p-2 rounded-lg" size={28} />
+            <MdArrowForwardIos className={`${isDarkMode ? "bg-gray-700 text-gray-300" : "bg-gray-200"} p-2 rounded-lg`} size={28} />
           </div>
           <div className="flex items-center justify-center">
-            <h1 className="bg-blue-600 text-white p-2 rounded-full h-10 w-10 flex items-center justify-center">1</h1>
+            <h1 className={`${isDarkMode ? "bg-blue-700 text-white" : "bg-blue-600 text-white"} p-2 rounded-full h-10 w-10 flex items-center justify-center`}>1</h1>
           </div>
           <div className="flex items-center justify-center">
-            <MdArrowBackIos className="bg-gray-200 p-2 rounded-lg" size={28} />
+            <MdArrowBackIos className={`${isDarkMode ? "bg-gray-700 text-gray-300" : "bg-gray-200"} p-2 rounded-lg`} size={28} />
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { CiExport } from 'react-icons/ci'
 import { MdOutlineArrowDropDown } from 'react-icons/md'
 import { FaFileExcel, FaPrint, FaFilePdf } from 'react-icons/fa';
 import RoleTable from './RoleTable';
-const Roles = () => {
+const Roles = ({isDarkMode}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const users = [
@@ -66,12 +66,14 @@ const Roles = () => {
   return (
     <div>
       <div>
-        <h1 className=' text-2xl text-gray-700 font-bold'>Roles List</h1>
-        <p className=' text-gray-500'>A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what user needs.</p>
+        <h1 className=' text-2xl text-gray-500 font-bold'>Roles List</h1>
+        <p className=' text-gray-500 font-semibold'>A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what user needs.</p>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16 mt-5'>
       
-      <div className="max-w-lg bg-white   px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -100,7 +102,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Administrator</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Administrator</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -110,7 +112,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -139,7 +143,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -149,7 +153,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -178,7 +184,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -188,7 +194,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -217,7 +225,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -227,7 +235,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -256,7 +266,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -266,7 +276,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -295,7 +307,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -305,7 +317,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -334,7 +348,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -344,7 +358,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -373,7 +389,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -383,7 +399,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -412,7 +430,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Editor</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Editor</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -425,7 +443,9 @@ const Roles = () => {
       
       
     
-      <div className="max-w-lg bg-white px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div   className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
         <div className=" flex justify-between ">
           <div>
             <h1 className="text-gray-500 font-semibold">Total 4 Users</h1>
@@ -454,7 +474,7 @@ const Roles = () => {
        <div>
          <div className="flex justify-between items-center mt-5">
           <div>
-            <h1 className="text-xl text-gray-700 font-semibold">Restricted User</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>Restricted User</h1>
             <p onClick={openModal} className=' text-blue-400 font-semibold cursor-pointer'>Edit Role</p>
           </div>
           <div>
@@ -464,7 +484,9 @@ const Roles = () => {
      
        </div>
       </div>
-      <div className="max-w-lg bg-white px-6 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+      <div  className={`max-w-lg px-6 py-4 rounded-lg overflow-hidden shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] ${
+    isDarkMode ? "bg-[#30334e] text-white" : "bg-white text-black"
+  }`}>
      
       <div>
   <div className="flex justify-between items-center mt-5">
@@ -494,7 +516,7 @@ const Roles = () => {
       </div>
 
 
-      <div className=' flex flex-col md:flex-row gap-4 bg-white py-3 px-4 rounded-lg justify-between'>
+      <div className={`flex flex-col md:flex-row gap-4 py-3 px-4 rounded-lg justify-between ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}>
 
 
         <div className='flex items-center gap-2'>
@@ -508,8 +530,10 @@ const Roles = () => {
 </select>
 
 <div className='  relative'>
-            <button className="btn  bg-white border border-gray-600" onClick={toggleDropdown}>
-              <CiExport size={23} /> Exports <MdOutlineArrowDropDown size={23} />
+<button 
+  className={`btn border border-gray-600 ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`} 
+  onClick={toggleDropdown}
+>              <CiExport size={23} /> Exports <MdOutlineArrowDropDown size={23} />
             </button>
       
             {isOpen && (
@@ -558,7 +582,7 @@ const Roles = () => {
         
       </div>
 
-      <RoleTable/>
+      <RoleTable isDarkMode={isDarkMode}/>
 
     
       </div>
@@ -577,7 +601,7 @@ const Roles = () => {
             &times;
           </button>
          <div className=' text-center'>
-         <h2 className="text-2xl font-semibold text-gray-700">Edit Role</h2>
+         <h2 className="text-2xl font-semibold text-gray-500">Edit Role</h2>
          <p>Set role permissions</p>
          <div className="flex mt-3 flex-col">
       <input
@@ -657,8 +681,8 @@ const Roles = () => {
          </div>
          
          <div className=' flex justify-center gap-3 my-4'>
-         <button className=' btn btn-color text-white py-1 px-7  rounded-lg text-lg'>Submit</button>
-         <button onClick={closeModal} className=' btn bg-white text-black rounded-lg px-7 text-lg'>Cancel</button>
+         <button className=' btn bg-sky-400 text-white py-1 px-7  rounded-lg text-lg'>Submit</button>
+         <button onClick={closeModal} className=' btn bg-gray-600  rounded-lg px-7 text-lg'>Cancel</button>
 
          </div>
         </div>

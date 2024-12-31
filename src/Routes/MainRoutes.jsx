@@ -160,18 +160,18 @@ function MainRoutes() {
             <Route path="/home/home1" element={<Home1 />} />
             <Route path="/about/about1" element={<About1 />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/users/list" element={<UserList />} />
-            <Route path="/roles" element={<Roles />} />
-            <Route path="/permission" element={<Permission />} />
+            <Route path="/users/list" element={<UserList isDarkMode={isDarkMode} />} />
+            <Route path="/roles" element={<Roles isDarkMode={isDarkMode} />} />
+            <Route path="/permission" element={<Permission  isDarkMode={isDarkMode} />} />
             <Route path="/dashboards/ecommerce" element={<Ecommerce />} />
             <Route path="/report" element={<Reports/>} />
-            <Route path="/settings" element={<Settings/>} />
-            <Route path="/settings/basic" element={<Basic/>} />
-            <Route path="/settings/payment" element={<Payment/>} />
-            <Route path="/settings/shipping" element={<Shipping/>} />
-            <Route path="/edit/shipping" element={<EditShipping/>} />
-            <Route path="/settings/terms" element={<Terms/>} />
-            <Route path="/settings/operation" element={<Operation/>} />
+            <Route path="/settings" element={<Settings isDarkMode={isDarkMode} />} />
+            <Route path="/settings/basic" element={<Basic isDarkMode={isDarkMode}/>} />
+            <Route path="/settings/payment" element={<Payment isDarkMode={isDarkMode}/>} />
+            <Route path="/settings/shipping" element={<Shipping isDarkMode={isDarkMode}/>} />
+            <Route path="/edit/shipping" element={<EditShipping isDarkMode={isDarkMode}/>} />
+            <Route path="/settings/terms" element={<Terms isDarkMode={isDarkMode}/>} />
+            <Route path="/settings/operation" element={<Operation isDarkMode={isDarkMode}/>} />
           </Routes>
         </main>
       </div>

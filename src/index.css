@@ -19,6 +19,12 @@
   margin: 20px auto;
   
 }
+/* Example custom CSS */
+/* .custom-datepicker .input {
+  border-color: blue;
+  color: blue;
+} */
+
 .ql-editor {
   color: red
 }

@@ -3,13 +3,13 @@ import UserStat from './UserStat'
 import UsersTable from './UsersTable'
 
 
-const UserList = () => {
+const UserList = ({isDarkMode}) => {
   return (
    <div>
 
-    <UserStat/>
+    <UserStat isDarkMode={isDarkMode}/>
 
-    <UsersTable/>
+    <UsersTable isDarkMode={isDarkMode}/>
 
    </div>
   )

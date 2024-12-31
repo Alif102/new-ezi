@@ -1,6 +1,6 @@
 import React from "react";
 
-const OperationTable = () => {
+const OperationTable = ({isDarkMode}) => {
   // Array containing table data
   const operations = [
     {
@@ -46,9 +46,11 @@ const OperationTable = () => {
   ];
 
   return (
-    <div className="overflow-x-auto bg-white p-4">
+    <div className={`overflow-x-auto p-4 ${isDarkMode ? 'bg-[#30334e]' : 'bg-white'}`}
+>
       <table className="table w-full">
-        <thead className="bg-[#f5f8fc]">
+        <thead className={`${isDarkMode ? 'bg-gray-700' : 'bg-[#f5f8fc]'}`}
+        >
           <tr>
             <th>Operation Date</th>
             <th>Operator</th>

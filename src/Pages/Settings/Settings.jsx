@@ -9,10 +9,13 @@ import terms from '../../assets/terms.png';
 import operation from '../../assets/operation.png';
 import administrator from '../../assets/administrator.png';
 
-const SettingItem = ({ icon, title, description, path }) => (
+const SettingItem = ({isDarkMode, icon, title, description, path }) => (
   <Link to={path}>
-    <div className="flex items-center gap-7 px-7 py-5 rounded-xl w-auto md:h-40 h-auto bg-white mx-auto cursor-pointer hover:bg-sky-50 hover:shadow-[0_5px_20px_rgba(8,_112,_184,_0.7)]">
-      <div>
+<div
+  className={`flex items-center gap-7 px-7 py-5 rounded-xl w-auto md:h-40 h-auto mx-auto cursor-pointer hover:shadow-[0_5px_20px_rgba(8,_112,_184,_0.7)]  ${
+    isDarkMode ? 'bg-[#30334e] ' : 'bg-white hover:bg-sky-50 '
+  }`}
+>      <div>
         <img src={icon} alt={`${title}-icon`} />
       </div>
       <div>
@@ -23,7 +26,7 @@ const SettingItem = ({ icon, title, description, path }) => (
   </Link>
 );
 
-const Settings = () => {
+const Settings = ({isDarkMode}) => {
   const settings = [
     {
       icon: basic,
@@ -78,7 +81,7 @@ const Settings = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
       {settings.map((setting, index) => (
-        <SettingItem
+        <SettingItem isDarkMode={isDarkMode}
           key={index}
           icon={setting.icon}
           title={setting.title}

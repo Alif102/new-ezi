@@ -1391,7 +1391,7 @@ const CreateProduct = ({isDarkMode}) => {
             type="text"
             value={profit.toFixed(2)}
             readOnly
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isDarkMode ? 'bg-black' : 'bg-gray-100'} cursor-not-allowed`}
+            className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-gray-100'} cursor-not-allowed`}
             />
         </div>
 
@@ -1404,7 +1404,7 @@ const CreateProduct = ({isDarkMode}) => {
             type="text"
             value={margin}
             readOnly
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isDarkMode ? 'bg-black' : 'bg-gray-100'} cursor-not-allowed`}
+            className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isDarkMode ? 'bg-[#30334e]' : 'bg-gray-100'} cursor-not-allowed`}
             />
         </div>
       

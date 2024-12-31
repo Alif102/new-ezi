@@ -483,8 +483,8 @@ const CreateProduct = ({isDarkMode}) => {
 
 
   // profit margin
-  const [retailPrice, setRetailPrice] = useState(0);
-  const [itemCost, setItemCost] = useState(0);
+  const [retailPrice, setRetailPrice] = useState('');
+  const [itemCost, setItemCost] = useState('');
 
   // Calculate profit and margin
   const profit = retailPrice - itemCost;

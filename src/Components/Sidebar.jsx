@@ -171,7 +171,7 @@ const Sidebar = ({ isCollapsed, isDarkMode, isSmallScreen }) => {
                       >
                         <VscCircleFilled size={20} className={`text-gray-400 ${isActive ? 'text-white bg-[#5393e4]' : ''}`} />
                         {!isCollapsed && (
-                          <span className={`whitespace-nowrap text-gray-600 ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300'}`}>{subItem.title}</span>
+                          <span className={`whitespace-nowrap  ${isDarkMode ? 'text-white' : 'text-gray-600'} ${isActive ? 'text-white bg-[#5393e4] rounded-md' : 'hover:bg-gray-300'}`}>{subItem.title}</span>
                         )}
                       </NavLink>
                     );

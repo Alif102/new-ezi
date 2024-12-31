@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaSearch } from "react-icons/fa";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import Home1 from "../Pages/Home1";
 import About1 from "../Pages/About1";
@@ -20,6 +20,10 @@ import EditShipping from "../Pages/Settings/Shipping/EditShipping";
 import Terms from "../Pages/Settings/Terms/Terms";
 import Operation from "../Pages/Settings/Operation/Operation";
 import Product from "../Pages/Product/Product";
+import { RiSunLine } from "react-icons/ri";
+import { BsMoonStarsFill } from "react-icons/bs";
+import BusinessName from "../Components/Navbar/BusinessName";
+import { GiFlyingFlag } from "react-icons/gi";
 
 function MainRoutes() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -125,8 +129,8 @@ function MainRoutes() {
   }`}
 >
             {/* Top Bar */}
-            <div className="flex justify-between items-center mb-4">
-      <div className="flex items-center">
+            <div className="flex flex-col md:flex-row   gap-4 p-2 md:justify-between items-center mb-10">
+      <div className="flex flex-row-reverse md:flex-row gap-2 items-center">
         <h1 className="text-lg font-bold">Dashboard</h1>
         {/* Bar Icon */}
         <button
@@ -136,14 +140,37 @@ function MainRoutes() {
           <FaBars />
         </button>
       </div>
+
+
+      <div className={`flex items-center space-x-2 ${
+  isDarkMode ? "bg-[#282a42]" : "bg-[#f7f7f9]"} border border-gray-300 rounded-lg p-2 w-auto`}
+>
+  <FaSearch className="text-gray-400" />
+  <input
+    type="text"
+    placeholder="Search..."
+    className="flex-grow bg-transparent outline-none"
+  />
+  <button
+    className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600"
+  >
+    Search
+  </button>
+</div>
+  
       <div className="flex gap-3 items-center">
+       
+    
+<div>
+  <BusinessName isDarkMode={isDarkMode}/>
+</div>
       
         {/* Theme Toggle Button (DaisyUI) */}
         <button
           className="btn btn-ghost"
           onClick={toggleTheme}
         >
-          {isDarkMode ? "🌙" : "🌞"}
+          {isDarkMode ? <BsMoonStarsFill size={20} color="yellow"  /> : <RiSunLine size={20} />}
         </button>
         <IoIosNotificationsOutline size={25} />
         <img
